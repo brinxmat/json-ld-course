@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p= introduction
+  h2 Sections
+  ul
+    for part in parts
+      li
+        a(href="#{part.resource}") #{part.title}

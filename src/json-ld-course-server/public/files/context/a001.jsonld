@@ -1,0 +1,8 @@
+{
+  "@context": {
+    "course": "http://localhost:3211/context/a001#",
+    "name": "course:name",
+    "birthDate": "course:birthDate",
+    "nationality": "course:nationality"
+  }
+}
