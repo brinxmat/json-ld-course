@@ -3,6 +3,12 @@ extends layout
 block content
   h1= title
   p= introduction
+  h2 Tools
+  ul
+    for tool in tools
+      li
+        a(href="#{tool.resource}") #{tool.title}
+
   h2 Sections
   ul
     for part in parts

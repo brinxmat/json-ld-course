@@ -6,6 +6,13 @@ var router = express.Router();
 const initialData = {
   title: 'JSON-LD Course',
   introduction: 'This is a short course in JSON-LD',
+  tools: [
+    {
+      part: 0,
+      title: 'JSON-LD Playground (running locally)',
+      resource: 'json-ld.org/playground/'
+    }
+  ],
   parts: [
     {
       part: 0,
