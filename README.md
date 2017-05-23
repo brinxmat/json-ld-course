@@ -1,6 +1,6 @@
 # Quickstart for course attendees
 
-(If you're a node.js expert/someone who really hates docker, feel free to skip to the [node.js](node-js) section below)
+(If you're a node.js expert/someone who really hates docker, feel free to skip to the [node.js](#node-js) section below)
 
 1. Install [Docker](https://www.docker.com/community-edition)
 
@@ -47,7 +47,7 @@ Open [<http://localhost:3211>](http://localhost:3211) in web browser
 
 Pre-requisites [Docker](https://www.docker.com/community-edition), Make ([Debian](https://www.google.no/search?q=sudo+apt-get+install+build-essential&oq=sudo+apt-get+install+build-essential) | [Mac](https://stackoverflow.com/questions/10265742/how-to-install-make-and-gcc-on-a-mac) | [Win](http://www.mingw.org/))
 
-What we're doing here is creating a docker container and then running it. Why are we creating a docker container when we could just as easily run node locally? Be my guest — see the section on [node.js](node-js) below; I'm not interested in helping people set up node.js or npm, and the docker set-up masks away all that stuff quite nicely.
+What we're doing here is creating a docker container and then running it. Why are we creating a docker container when we could just as easily run node locally? Be my guest — see the section on [node.js](#node-js) below; I'm not interested in helping people set up node.js or npm, and the docker set-up masks away all that stuff quite nicely.
 
 We build the docker image by running the following command in the json-ld-course-server directory 
 
