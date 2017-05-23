@@ -5,8 +5,30 @@
 1. Install [Docker](https://www.docker.com/community-edition)
 
 2. Open terminal, run ```$ docker pull brinxmat/json-ld-course-server```
+3. The run ```$ docker run -p 3211:3211 -it --rm --name json-ld-course-server brinxmat/json-ld-course-server ```
 
 3. Open [<http://localhost:3211>](http://localhost:3211) in web browser
+
+4. When you've finished:
+
+```
+docker ps -a |  grep json-ld-course-server
+```
+Which returns something like this:
+
+```
+CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS                    NAMES
+96c33a0cd6f4        json-ld-course-server   "npm start"         6 seconds ago       Up 5 seconds        0.0.0.0:3211->3211/tcp   json-ld-course-server
+```
+You can stop the container with: ```$ docker stop <CONTAINER ID>```
+
+The delete it with ```$ docker rm <CONTAINER ID>```
+
+To remove the image we downloaded:
+
+```
+$ docker rmi brinxmat/json-ld-course-server
+```
 
 # Less quick start for people who enjoy struggling
 
