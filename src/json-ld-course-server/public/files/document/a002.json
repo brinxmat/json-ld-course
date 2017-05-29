@@ -4,5 +4,8 @@
     "name": "course:name",
     "birthDate": "course:birthDate",
     "nationality": "course:nationality"
-  }
+  },
+  "name": "Smith, Sandy",
+  "birthDate": "1978-02-21",
+  "nationality": "British"
 }

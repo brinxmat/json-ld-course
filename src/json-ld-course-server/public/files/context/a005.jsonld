@@ -1,0 +1,8 @@
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document"
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "uri": "@id",
+    "type": "@type",
+    "ontology": "http://localhost:3211/ontology#",
+    "Document": "ontology:Document",
+    "title": "ontology:title"
+  },
+  "uri": "http://localhost:3211/document/a006",
+  "type": "Document",
+  "title": {
+    "@value": "Peer Gynt",
+    "@type": "http://www.w3.org/2001/XMLSchema#string"
+  }
+}

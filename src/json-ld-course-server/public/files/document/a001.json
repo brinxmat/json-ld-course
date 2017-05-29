@@ -1,0 +1,6 @@
+{
+  "@context": "http://localhost:3211/context/a001.jsonld",
+  "name": "Smith, Sandy",
+  "birthDate": "1978-02-21",
+  "nationality": "British"
+}
