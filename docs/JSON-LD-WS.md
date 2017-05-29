@@ -232,6 +232,8 @@ Convert the following JSON document to a JSON-LD document:
 ```
 Simplest way:
 
+> Example: [Exercise one: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa001)
+
 ```
 {
     "@context": "http://localhost:3211/context/a001.jsonld",
@@ -241,6 +243,8 @@ Simplest way:
 }
 ```
 Here we simply add a "@context" to the JSON, think of "@context" in the same way you would if someone talked about a context for a discussion — a way of making it clear what we're talking about and thereby how to interpret the terms that are used. Thus, we are not talking about "name", "birthDate" and "nationality" in general terms, we are talking about them in specific terms — the terms defined by the context.
+
+Looking at the data on the different tabs, we notice that the context has been applied, so that *name* is now equivalent to *http://localhost:3211/context/a001#name*.
 
 The context here is a file that can be dereferenced, the vocabulary it defines applies to the entire JSON document; this is similar to namespaced vocabularies in RDF.
 
@@ -256,18 +260,20 @@ If we dereference the context document directly, we see:
   }
 }
 ```
-Rather than simply linking to the context-document, we could have [included it directly in the JSON](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=%7B%22%40context%22%3A%7B%22course%22%3A%22http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa001%23%22%2C%22name%22%3A%22course%3Aname%22%2C%22birthDate%22%3A%22course%3AbirthDate%22%2C%22nationality%22%3A%22course%3Anationality%22%7D%2C%22birthDate%22%3A%221978-02-21%22%2C%22name%22%3A%22Smith%2C%20Sandy%22%2C%22nationality%22%3A%22British%22%7D&context=%7B%22%40context%22%3A%7B%22course%22%3A%22http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa001%23%22%2C%22name%22%3A%22course%3Aname%22%2C%22birthDate%22%3A%22course%3AbirthDate%22%2C%22nationality%22%3A%22course%3Anationality%22%7D%7D).
+Rather than simply linking to the context-document, we could have included it directly in the JSON:
+
+> Example: [Exercise 2: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
 
 ```
 {
   "@context": {
-    "course": "http://localhost:3211/context/a001#",
+    "course": "http://localhost:3211/ontology#",
     "name": "course:name",
     "birthDate": "course:birthDate",
     "nationality": "course:nationality"
   },
-  "birthDate": "1978-02-21",
   "name": "Smith, Sandy",
+  "birthDate": "1978-02-21",
   "nationality": "British"
 }
 ```
@@ -282,20 +288,22 @@ Note that there are several possible representations of this data in JSON-LD, th
 
 The first of these, expansion, *expands* the property references and removes the context object from the JSON. For example:
 
+> Example [Exercise two: Adding context (Expanded)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
+
 ```
 [
   {
-    "http://localhost:3211/context/a001#birthDate": [
+    "http://localhost:3211/ontology#birthDate": [
       {
         "@value": "1978-02-21"
       }
     ],
-    "http://localhost:3211/context/a001#name": [
+    "http://localhost:3211/ontology#name": [
       {
         "@value": "Smith, Sandy"
       }
     ],
-    "http://localhost:3211/context/a001#nationality": [
+    "http://localhost:3211/ontology#nationality": [
       {
         "@value": "British"
       }
@@ -307,12 +315,25 @@ This can be useful in contexts where a single, regular representation of data is
 
 This is a particularly verbose representation, but one which can be used with simple processors that understand nothing of JSON-LD.
 
-The second representation, compaction, provides structure for data that can be used for particular applications. Supplying a context makes it possible to compact the properties to terms and makes the data easier to work with in most programming jobs.
+The second representation, compaction, provides structure for data that can be used for particular applications. 
+
+> Example [Exercise two: Adding context (Compacted)](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
+
+```
+{
+  "http://localhost:3211/ontology#birthDate": "1978-02-21",
+  "http://localhost:3211/ontology#name": "Smith, Sandy",
+  "http://localhost:3211/ontology#nationality": "British"
+}
+```
+Supplying a context makes it possible to compact the properties to terms and makes the data easier to work with in most programming jobs.
+
+> Example: [Exercise three: Adding context (Compacted with context)](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa003&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa003.jsonld)
 
 ```
 {
   "@context": {
-    "course": "http://localhost:3211/context/a001#",
+    "course": "http://localhost:3211/ontology#",
     "name": "course:name",
     "birthDate": "course:birthDate",
     "nationality": "course:nationality"
@@ -322,18 +343,21 @@ The second representation, compaction, provides structure for data that can be u
   "nationality": "British"
 }
 ```
+
 The third representation, flattening, is similar to expansion, but takes the simplification of the structure of the document a step further, forcing every property of a node into a single object, and labelling everything that is a blank node.
 
 In our case, the fact that we have an implicit blank node is made explicit and the *@graph* is added to wrap the node we are describing.
+
+> Example [Exercise two: Adding context (Flattened)](http://localhost:3211/json-ld.org/playground/#startTab=tab-flattened&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
 
 ```
 {
   "@graph": [
     {
       "@id": "_:b0",
-      "http://localhost:3211/context/a001#birthDate": "1978-02-21",
-      "http://localhost:3211/context/a001#name": "Smith, Sandy",
-      "http://localhost:3211/context/a001#nationality": "British"
+      "http://localhost:3211/ontology#birthDate": "1978-02-21",
+      "http://localhost:3211/ontology#name": "Smith, Sandy",
+      "http://localhost:3211/ontology#nationality": "British"
     }
   ]
 }
@@ -366,17 +390,150 @@ Thus, data passed to flattening may differ based on the context object that is a
 
 JSON-LD can be structured in a number of ways depending on how the data has been processed; depending on the use case, data can be structured in ways that make the data verbose and leave underlying structure implicit in differing degrees.
 
-In the remainder, we will largely ignore expansion and flattening, and concentrate on using JSON-LD to structure data in a way that can be used easily with applications.
+In the remainder of the course, we will largely ignore expansion and flattening, and concentrate on using JSON-LD to structure data in a way that can be used easily with applications.
 
-##JSON-LD details
+## Adding more features to the mix
 
-**@context**
+JSON-LD is very powerful for application developers because it allows us to mark up data semantically so that it is unambiguous in a way JSON simply isn't. Adding this mark-up can make a mess of the JSON, and the data becomes largely incomprehensible or it can be marked up in a way that makes it easy to read without any real trade-off.
 
-Provides the context object
+The element that adds the ability to make sense at the same time as not being awful to work with is the "@context" object, which we have already seen. Take a quick look again at the flattened graph without a @context object; this one is relatively simple, but more complex data structures become increasingly less easy to understand as a human. While some might say that this is not an issue, I'd argue that it is still a human working with the interface.
 
-**@type**
+### @context as a tool for aliasing
 
-provides datatype information
+Many people don't understand or care about the semantics, and maybe they shouldn't need to; some things about JSON-LD stick in their throats. Typically, it is the special "@" keys/values that people turn their noses up at possibly because:
+
+```
+  const type = object['@type']        // unaliased
+  const type = object.type            // aliased
+```
+
+A simple step, which shows some of the functionality of the @context, can be to simply alias the "@" keys/values.
+
+> Example: [Exercise four: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa004.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa004.jsonld)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type"
+	},
+	"uri": "http://localhost:3211/document/a001",
+	"type": "http://localhost:3211/ontology#Document"
+}
+```
+
+Here, I have aliased the @id to *uri* because that makes me feel more comfortable, because it is this that the JSON-LD document is describing. 
+
+Adding more data to the structure, we can see some other features of this way of doing things. Let's expand the context with a few shorthands:
+
+> Example: [Exercise five: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa005.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa005.jsonld)
+
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document"
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document" 
+}
+```
+
+### Datatypes
+
+Notice that we added a @type, datatype for the object; datatypes can also be applied to values:
+
+> Example: [Exercise six: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa006)
+
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document",
+        "title": "ontology:title"
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": {
+        "@value": "Peer Gynt",
+        "@type": "http://www.w3.org/2001/XMLSchema#string"
+    }
+}
+```
+
+Here, we say that the title has a value "Peer Gynt" and the type of this is xsd:string, or rather we would if we had put xsd into the context…
+
+> Example: [Exercise seven: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa007)
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document",
+        "title": "ontology:title",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": {
+        "@value": "Peer Gynt",
+        "@type": "xsd:string"
+    }
+}
+```
+
+There are a few things about this that are not very likeable; the whole "@value" and "@type" cluster, while practical from a regularity perspective is neither pretty nor necessary for most applications. Let's change this:
+
+> Example: [Exercise eight: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa008)
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "title": {
+          "@id": "ontology:title",
+          "@type": "xsd:string"
+        }
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": "Peer Gynt"
+}
+```
+
+**NB!:** Using aliasing internally in the @context *usually* fails:
+
+> Example: [Exercise nine: Datatypes **(Fails)**](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa009)
+
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "title": {
+          "uri": "ontology:title",
+          "type": "xsd:string"
+        }
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": "Peer Gynt"
+}
+```
+
+
+
 
 ## Readings
 
