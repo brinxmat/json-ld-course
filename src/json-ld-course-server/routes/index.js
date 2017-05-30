@@ -26,42 +26,42 @@ const initialData = {
     },
     {
       part: 3,
-      title: 'Exercise two: Adding context',
+      title: 'Exercise three: Adding context',
       resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa003&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa003.jsonld'
     },
     {
       part: 4,
-      title: 'Exercise three: Aliasing',
+      title: 'Exercise four: Aliasing',
       resource: 'json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa004.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa004.jsonld'
     },
     {
       part: 5,
-      title: 'Exercise four: Aliasing',
+      title: 'Exercise five: Aliasing',
       resource: 'json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa005.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa005.jsonld'
     },
     {
       part: 6,
-      title: 'Exercise five: Datatypes',
+      title: 'Exercise six: Datatypes',
       resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa006'
     },
     {
       part: 7,
-      title: 'Exercise six: Datatypes',
+      title: 'Exercise seven: Datatypes',
       resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa007'
     },
     {
       part: 8,
-      title: 'Exercise five: Datatypes',
+      title: 'Exercise eight: Datatypes',
       resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa008'
     },
     {
       part: 9,
-      title: 'Exercise five: Datatypes (fails)',
+      title: 'Exercise nine: Datatypes (fails)',
       resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa009'
     },
     {
       part: 10,
-      title: 'Exercise five: Datatypes',
+      title: 'Exercise ten: Datatypes',
       resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa010'
     }
   ]
@@ -78,14 +78,14 @@ router.get('/:contextDirectory/:contextFile', function (req, res, next) {
   var contextFile = req.params.contextFile;
   var contextDirectory = req.params.contextDirectory;
 
-  var leaf = (contextDirectory === 'document' && contextFile.substring(contextFile.length - json.length) !== json) ?
+  var leaf = (contextDirectory !== 'context' && contextFile.substring(contextFile.length - json.length) !== json) ?
   contextFile + json : contextFile;
 
   var options = {
     root: __dirname + '/../public/',
     dotfiles: 'deny',
     'headers': {
-      'Content-Type': 'application/ld+json'
+      'Content-Type': 'application/ld+json; charset=utf-8'
     }
   }
 
