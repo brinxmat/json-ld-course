@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "uri": "@id",
+    "type": "@type",
+    "graph": "@graph",
+    "ontology": "http://localhost:3211/ontology#",
+    "Document": "ontology:Document",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "firstPublished": {
+      "@id": "ontology:firstPublished",
+      "@type": "xsd:date"
+    },
+    "dbpediaPage": {
+      "@id": "ontology:dbpediaPage",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "ontology:title",
+      "@container": "@language"
+    },
+    "contributor": {
+      "@id": "ontology:contributor",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "ontology:name",
+      "@container": "@language"
+    },
+    "birthDate": {
+      "@type": "xsd:date",
+      "@id": "ontology:birthDate"
+    },
+    "deathDate": {
+      "@type": "xsd:date",
+      "@id": "ontology:deathDate"
+    }
+  },
+  "graph": [{
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": {
+      "en": "Peer Gynt",
+      "no": "Peer Gynt",
+      "da": "Peer Gynt",
+      "el": "Πέερ Γκυντ",
+      "cs": "Peer Gynt",
+      "ca": "Peer Gynt",
+      "fi": "Peer Gynt",
+      "fr": "Peer Gynt",
+      "nl": "Peer Gynt",
+      "de": "Peer Gynt"
+    },
+    "firstPublished": "1867-11-14",
+    "dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt",
+    "contributor": "http://localhost:3211/person/p001"
+  },
+    {
+      "uri": "http://localhost:3211/person/p001",
+      "name": {
+        "en": "Henrik Ibsen",
+        "no": "Henrik Ibsen",
+        "da": "Henrik Ibsen",
+        "el": "Ερρίκος Ίψεν",
+        "cs": "Henrik Ibsen",
+        "ca": "Henrik Ibsen",
+        "fi": "Henrik Ibsen",
+        "fr": "Henrik Ibsen",
+        "nl": "Henrik Ibsen",
+        "de": "Henrik Ibsen"
+      },
+      "birthDate": "1828-03-20",
+      "deathDate": "1906-05-23"
+    }
+  ]
+}

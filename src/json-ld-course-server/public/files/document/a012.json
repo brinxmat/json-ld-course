@@ -1,0 +1,67 @@
+{
+  "@context": {
+    "uri": "@id",
+    "type": "@type",
+    "ontology": "http://localhost:3211/ontology#",
+    "Document": "ontology:Document",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "title": {
+      "@id": "ontology:title",
+      "@type": "xsd:string"
+    },
+    "firstPublished": {
+      "@id": "ontology:firstPublished",
+      "@type": "xsd:date"
+    },
+    "dbpediaPage": {
+      "@id": "ontology:dbpediaPage",
+      "@type": "@id"
+    },
+    "titleEn": {
+      "@id": "ontology:titleEn",
+      "@language": "en"
+    },
+    "titleNo": {
+      "@id": "ontology:titleNo",
+      "@language": "no"
+    },
+    "titleDa": {
+      "@id": "ontology:titleDa",
+      "@language": "da"
+    },
+    "titleEl": {
+      "@id": "ontology:titleEl",
+      "@language": "el"
+    },
+    "titleCs": {
+      "@id": "ontology:titleCs",
+      "@language": "cs"
+    },
+    "titleCa": {
+      "@id": "ontology:titleCa",
+      "@language": "ca"
+    },
+    "titleFi": {
+      "@id": "ontology:titleFi",
+      "@language": "fi"
+    },
+    "titleFr": {
+      "@id": "ontology:titleFr",
+      "@language": "fr"
+    }
+  },
+  "uri": "http://localhost:3211/document/a001",
+  "type": "Document",
+  "titleEn": "Peer Gynt",
+  "titleNo": "Peer Gynt",
+  "titleDa": "Peer Gynt",
+  "titleEl": "Πέερ Γκυντ",
+  "titleCs": "Peer Gynt",
+  "titleCa": "Peer Gynt",
+  "titleFi": "Peer Gynt",
+  "titleFr": "Peer Gynt",
+  "titleNl": "Peer Gynt",
+  "titleDe": "Peer Gynt",
+  "firstPublished": "1867-11-14",
+  "dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt"
+}

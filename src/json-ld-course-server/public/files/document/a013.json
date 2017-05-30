@@ -1,0 +1,37 @@
+{
+  "@context": {
+    "uri": "@id",
+    "type": "@type",
+    "ontology": "http://localhost:3211/ontology#",
+    "Document": "ontology:Document",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "firstPublished": {
+      "@id": "ontology:firstPublished",
+      "@type": "xsd:date"
+    },
+    "dbpediaPage": {
+      "@id": "ontology:dbpediaPage",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "ontology:title",
+      "@container": "@language"
+    }
+  },
+  "uri": "http://localhost:3211/document/a001",
+  "type": "Document",
+  "title": {
+    "en": "Peer Gynt",
+    "no": "Peer Gynt",
+    "da": "Peer Gynt",
+    "el": "Πέερ Γκυντ",
+    "cs": "Peer Gynt",
+    "ca": "Peer Gynt",
+    "fi": "Peer Gynt",
+    "fr": "Peer Gynt",
+    "nl": "Peer Gynt",
+    "de": "Peer Gynt"
+  },
+  "firstPublished": "1867-11-14",
+  "dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt"
+}
