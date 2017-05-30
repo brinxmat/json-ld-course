@@ -532,8 +532,507 @@ There are a few things about this that are not very likeable; the whole "@value"
 }
 ```
 
+Adding other datatypes:
+
+> Example: [Exercise ten: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa010)
+
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "title": {
+          "@id": "ontology:title",
+          "@type": "xsd:string"
+        },
+        "firstPublished": {
+            "@id": "ontology:firstPublished",
+            "@type": "xsd:date"
+        },
+        "dbpediaPage": {
+            "@id": "ontology:dbpediaPage",
+            "@type": "@id"
+        }
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": "Peer Gynt",
+    "firstPublished": "1867-11-14",
+    "dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt"
+}
+```
+
+Note that any datatype that can be used in RDF can be used in JSON-LD; note also the special function of "@id" visible in the *expanded* view, setting the datatype of the URI as a reference (in JSON-LD-speak) or a URI-resource in RDF.
+
+### Languages
+
+JSON-LD supports internationalisation using [BCP47](https://tools.ietf.org/html/bcp47) tags:
+
+```
+  "title": {
+      "@value": "Peer Gynt",
+      "@language": "en"
+  }
+```
+
+Adding this to the main example, with a few variants shows that this is a bit untidy:
+
+> Example: [Exercise eleven: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa011)
+
+```
+{
+    "@context": {
+        "uri": "@id",
+        "type": "@type",
+        "ontology": "http://localhost:3211/ontology#",
+        "Document": "ontology:Document",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "title": {
+            "@id": "ontology:title",
+            "@type": "xsd:string"
+        },
+        "firstPublished": {
+            "@id": "ontology:firstPublished",
+            "@type": "xsd:date"
+        },
+        "dbpediaPage": {
+            "@id": "ontology:dbpediaPage",
+            "@type": "@id"
+        }
+    },
+    "uri": "http://localhost:3211/document/a001",
+    "type": "Document",
+    "title": [{ 
+        "@value": "Peer Gynt",
+        "@language": "en"
+    },
+    {
+        "@value": "Peer Gynt",
+        "@language": "no"
+    }, 
+    {
+        "@value": "Peer Gynt",
+        "@language": "da"
+    },     
+    {
+        "@value": "Πέερ Γκυντ",
+        "@language": "el"
+    },     
+    {
+        "@value": "Peer Gynt",
+        "@language": "cs"
+    },     
+    {
+        "@value": "Peer Gynt",
+        "@language": "ca"
+    },     
+    {
+        "@value": "Peer Gynt",
+        "@language": "fi"
+    },     
+    {
+        "@value": "Peer Gynt",
+        "@language": "fr"
+    },     
+    {
+        "@value": "Peer Gynt",
+        "@language": "nl"
+    },     
+    {
+        "@value": "Peer Gynt",
+        "@language": "de"
+    }],
+    "firstPublished": "1867-11-14",
+    "dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt"
+}
+```
+
+Let's tidy that up a bit, in the way [Manu Sporny suggests](https://www.youtube.com/watch?v=UmvWk_TQ30A):
+
+> Example: [Exercise twelve: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa012)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type",
+		"ontology": "http://localhost:3211/ontology#",
+		"Document": "ontology:Document",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"title": {
+			"@id": "ontology:title",
+			"@type": "xsd:string"
+		},
+		"firstPublished": {
+			"@id": "ontology:firstPublished",
+			"@type": "xsd:date"
+		},
+		"dbpediaPage": {
+			"@id": "ontology:dbpediaPage",
+			"@type": "@id"
+		},
+		"titleEn": {
+			"@id": "ontology:titleEn",
+			"@language": "en"
+		},
+		"titleNo": {
+			"@id": "ontology:titleNo",
+			"@language": "no"
+		},
+		"titleDa": {
+			"@id": "ontology:titleDa",
+			"@language": "da"
+		},
+		"titleEl": {
+			"@id": "ontology:titleEl",
+			"@language": "el"
+		},
+		"titleCs": {
+			"@id": "ontology:titleCs",
+			"@language": "cs"
+		},
+		"titleCa": {
+			"@id": "ontology:titleCa",
+			"@language": "ca"
+		},
+		"titleFi": {
+			"@id": "ontology:titleFi",
+			"@language": "fi"
+		},
+		"titleFr": {
+			"@id": "ontology:titleFr",
+			"@language": "fr"
+		}
+	},
+	"uri": "http://localhost:3211/document/a001",
+	"type": "Document",
+	"titleEn": "Peer Gynt",
+	"titleNo": "Peer Gynt",
+	"titleDa": "Peer Gynt",
+	"titleEl": "Πέερ Γκυντ",
+	"titleCs": "Peer Gynt",
+	"titleCa": "Peer Gynt",
+	"titleFi": "Peer Gynt",
+	"titleFr": "Peer Gynt",
+	"titleNl": "Peer Gynt",
+	"titleDe": "Peer Gynt",
+	"firstPublished": "1867-11-14",
+	"dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt"
+}
+```
+However, I guess I prefer the [language map](https://json-ld.org/spec/latest/json-ld-api/#dfn-language-map) behaviour:
+
+> Example: [Exercise thirteen: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa013)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type",
+		"ontology": "http://localhost:3211/ontology#",
+		"Document": "ontology:Document",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"firstPublished": {
+			"@id": "ontology:firstPublished",
+			"@type": "xsd:date"
+		},
+		"dbpediaPage": {
+			"@id": "ontology:dbpediaPage",
+			"@type": "@id"
+		},
+		"title": {
+			"@id": "ontology:title",
+			"@container": "@language"
+		}
+	},
+	"uri": "http://localhost:3211/document/a001",
+	"type": "Document",
+	"title": {
+		"en": "Peer Gynt",
+		"no": "Peer Gynt",
+		"da": "Peer Gynt",
+		"el": "Πέερ Γκυντ",
+		"cs": "Peer Gynt",
+		"ca": "Peer Gynt",
+		"fi": "Peer Gynt",
+		"fr": "Peer Gynt",
+		"nl": "Peer Gynt",
+		"de": "Peer Gynt"
+	},
+	"firstPublished": "1867-11-14",
+	"dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt"
+}
+```
+
+### Embedding resources
+
+Continuing with our example, let's take a look at another resource:
+
+> Example: [Exercise fourteen: Embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fperson%2Fa001)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type",
+		"ontology": "http://localhost:3211/ontology#",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"name": {
+			"@id": "ontology:name",
+			"@container": "@language"
+		},
+		"birthDate": {
+			"@type": "xsd:date",
+			"@id": "ontology:birthDate"
+		},
+		"deathDate": {
+			"@type": "xsd:date",
+			"@id": "ontology:deathDate"
+		}
+	},
+	"uri": "http://localhost:3211/person/a0014",
+	"name": {
+		"en": "Henrik Ibsen",
+		"no": "Henrik Ibsen",
+		"da": "Henrik Ibsen",
+		"el": "Ερρίκος Ίψεν",
+		"cs": "Henrik Ibsen",
+		"ca": "Henrik Ibsen",
+		"fi": "Henrik Ibsen",
+		"fr": "Henrik Ibsen",
+		"nl": "Henrik Ibsen",
+		"de": "Henrik Ibsen"
+	},
+	"birthDate": "1828-03-20",
+	"deathDate": "1906-05-23"
+}
+```
+We can reference this resource in our existing resource:
+
+> Example: [Exercise fourteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa014)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type",
+		"ontology": "http://localhost:3211/ontology#",
+		"Document": "ontology:Document",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"firstPublished": {
+			"@id": "ontology:firstPublished",
+			"@type": "xsd:date"
+		},
+		"dbpediaPage": {
+			"@id": "ontology:dbpediaPage",
+			"@type": "@id"
+		},
+		"title": {
+			"@id": "ontology:title",
+			"@container": "@language"
+		},
+		"contributor": {
+			"@id": "ontology:contributor",
+			"@type": "@id"
+		}
+	},
+	"uri": "http://localhost:3211/document/a001",
+	"type": "Document",
+	"title": {
+		"en": "Peer Gynt",
+		"no": "Peer Gynt",
+		"da": "Peer Gynt",
+		"el": "Πέερ Γκυντ",
+		"cs": "Peer Gynt",
+		"ca": "Peer Gynt",
+		"fi": "Peer Gynt",
+		"fr": "Peer Gynt",
+		"nl": "Peer Gynt",
+		"de": "Peer Gynt"
+	},
+	"firstPublished": "1867-11-14",
+	"dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt",
+	"contributor": "http://localhost:3211/person/p001"
+}
+```
+We could put everything into one graph:
+
+> Example: [Exercise fifteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa015)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type",
+		"graph": "@graph",
+		"ontology": "http://localhost:3211/ontology#",
+		"Document": "ontology:Document",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"firstPublished": {
+			"@id": "ontology:firstPublished",
+			"@type": "xsd:date"
+		},
+		"dbpediaPage": {
+			"@id": "ontology:dbpediaPage",
+			"@type": "@id"
+		},
+		"title": {
+			"@id": "ontology:title",
+			"@container": "@language"
+		},
+		"contributor": {
+			"@id": "ontology:contributor",
+			"@type": "@id"
+		},
+		"name": {
+			"@id": "ontology:name",
+			"@container": "@language"
+		},
+		"birthDate": {
+			"@type": "xsd:date",
+			"@id": "ontology:birthDate"
+		},
+		"deathDate": {
+			"@type": "xsd:date",
+			"@id": "ontology:deathDate"
+		}
+	},
+	"graph": [{
+			"uri": "http://localhost:3211/document/a001",
+			"type": "Document",
+			"title": {
+				"en": "Peer Gynt",
+				"no": "Peer Gynt",
+				"da": "Peer Gynt",
+				"el": "Πέερ Γκυντ",
+				"cs": "Peer Gynt",
+				"ca": "Peer Gynt",
+				"fi": "Peer Gynt",
+				"fr": "Peer Gynt",
+				"nl": "Peer Gynt",
+				"de": "Peer Gynt"
+			},
+			"firstPublished": "1867-11-14",
+			"dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt",
+			"contributor": "http://localhost:3211/person/p001"
+		},
+		{
+			"uri": "http://localhost:3211/person/p001",
+			"name": {
+				"en": "Henrik Ibsen",
+				"no": "Henrik Ibsen",
+				"da": "Henrik Ibsen",
+				"el": "Ερρίκος Ίψεν",
+				"cs": "Henrik Ibsen",
+				"ca": "Henrik Ibsen",
+				"fi": "Henrik Ibsen",
+				"fr": "Henrik Ibsen",
+				"nl": "Henrik Ibsen",
+				"de": "Henrik Ibsen"
+			},
+			"birthDate": "1828-03-20",
+			"deathDate": "1906-05-23"
+		}
+	]
+}
+```
+
+Or we can embed it:
+
+> Example: [Exercise sixteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa016)
+
+```
+{
+	"@context": {
+		"uri": "@id",
+		"type": "@type",
+		"ontology": "http://localhost:3211/ontology#",
+		"Document": "ontology:Document",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"firstPublished": {
+			"@id": "ontology:firstPublished",
+			"@type": "xsd:date"
+		},
+		"dbpediaPage": {
+			"@id": "ontology:dbpediaPage",
+			"@type": "@id"
+		},
+		"title": {
+			"@id": "ontology:title",
+			"@container": "@language"
+		},
+		"contributor": {
+			"@id": "ontology:contributor",
+			"@type": "@id"
+		},
+		"name": {
+			"@id": "ontology:name",
+			"@container": "@language"
+		},
+		"birthDate": {
+			"@type": "xsd:date",
+			"@id": "ontology:birthDate"
+		},
+		"deathDate": {
+			"@type": "xsd:date",
+			"@id": "ontology:deathDate"
+		}
+	},
+	"uri": "http://localhost:3211/document/a001",
+	"type": "Document",
+	"title": {
+		"en": "Peer Gynt",
+		"no": "Peer Gynt",
+		"da": "Peer Gynt",
+		"el": "Πέερ Γκυντ",
+		"cs": "Peer Gynt",
+		"ca": "Peer Gynt",
+		"fi": "Peer Gynt",
+		"fr": "Peer Gynt",
+		"nl": "Peer Gynt",
+		"de": "Peer Gynt"
+	},
+	"firstPublished": "1867-11-14",
+	"dbpediaPage": "http://dbpedia.org/resource/Peer_Gynt",
+	"contributor": {
+		"uri": "http://localhost:3211/person/p001",
+		"name": {
+			"en": "Henrik Ibsen",
+			"no": "Henrik Ibsen",
+			"da": "Henrik Ibsen",
+			"el": "Ερρίκος Ίψεν",
+			"cs": "Henrik Ibsen",
+			"ca": "Henrik Ibsen",
+			"fi": "Henrik Ibsen",
+			"fr": "Henrik Ibsen",
+			"nl": "Henrik Ibsen",
+			"de": "Henrik Ibsen"
+		},
+		"birthDate": "1828-03-20",
+		"deathDate": "1906-05-23"
+	}
+}
+```
+
+> What happens if a references b, which references a?
 
 
+## Performance
+
+JSON-LD performance out-of-the-box is [apparently very bad](http://www.dr-chuck.com/csev-blog/2016/04/json-ld-performance-sucks-for-api-specs/). In fact, we have never experienced any performance issues really, probably because we aren't doing anything that requires performance near to real time or in high volume. 
+
+In practice, performance depends in large part on which libraries you are using and what the data is that you're processing.
+
+If you want the best possible performance, a few simple things can be done.
+
+### Context caching
+
+Caching the context object reduces JSON-LD processing times drastically, this is an issue [discussed at length by Manu Sporny](http://manu.sporny.org/2016/json-ld-context-caching/).
+
+* [JSON-LD context-caching node library](https://www.npmjs.com/package/json-ld-context-cache)
 
 ## Readings
 
@@ -554,6 +1053,8 @@ W3C. 2017. [JSON-LD 1.1: A JSON-based Serialization for Linked Data](http://json
 W3C. 2014. [JSON-LD 1.0 Processing Algorithms and API](https://www.w3.org/TR/json-ld-api/). Accessed 2017-05-21.
 
 Sporny, Manu. 2014. [JSON-LD and Why I Hate the Semantic Web](http://manu.sporny.org/2014/json-ld-origins-2/). Accessed 2017-05-20.
+
+Sporny, Manu. 2016. [JSON-LD context caching](http://manu.sporny.org/2016/json-ld-context-caching/). Accessed (via Wayback Machine): 2017-05-30.
 
 ### JSON Schema
 
