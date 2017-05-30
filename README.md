@@ -5,11 +5,9 @@
 1. Install [Docker](https://www.docker.com/community-edition)
 
 2. Open terminal, run ```$ docker pull brinxmat/json-ld-course-server```
-3. The run ```$ docker run -p 3211:3211 -it --rm --name json-ld-course-server brinxmat/json-ld-course-server ```
-
-3. Open [<http://localhost:3211>](http://localhost:3211) in web browser
-
-4. When you've finished:
+3. Run ```$ docker run -p 3211:3211 -it --rm --name json-ld-course-server brinxmat/json-ld-course-server ``` which runs the docker container as a foreground process — if you want to keep the container running, you'll need to open a new terminal to run other shell processes.
+4. Open [<http://localhost:3211>](http://localhost:3211) in web browser
+6. When you've finished and want to tidy up, in a new terminal:
 
 ```
 docker ps -a |  grep json-ld-course-server
