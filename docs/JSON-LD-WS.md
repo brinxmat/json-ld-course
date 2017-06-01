@@ -17,9 +17,9 @@ Plan:
 | 15:00-15:45 | Further considerations           |
 | 15:45-16:00 | Wrapping up                      |
 
-##What is JSON-LD?
+## What is JSON-LD?
 
-##What is JSON?
+### What is JSON?
 
 In order to understand some of the motivation for JSON-LD, it is worth looking at the basics of JSON.
 
@@ -1019,6 +1019,91 @@ Or we can embed it:
 
 > What happens if a references b, which references a?
 
+### Containers
+
+$$$$$$$$ Describe the container concept $$$$$$
+
+#### Sets and lists
+
+This should really be covered further up.
+
+In JSON-LD an array is generally considered to be an unordered list; one can specify that an array is explicitly unordered by using the *@set* keyword. 
+
+In cases where an explicitly ordered list is required, the *@list* keyword can be used.
+
+```
+{
+	"@context": {
+		"names": {
+			"@id": "http://localhost:3211/ontology#names",
+			"@container": "@set"
+		},
+		"alphabeticalNames": {
+			"@id": "http://localhost:3211/ontology#alphabeticalNames",
+			"@container": "@list"
+		}
+	},
+	"names": ["Jim", "Jimmy", "Jimmie", "Jimi", "James", "Jimbo"],
+	"alphabeticalNames": ["James", "Jim", "Jimbo", "Jimi", "Jimmie", "Jimmy"]
+}
+```
+
+
+## Programming with JSON-LD
+
+### State of the art.
+
+#### C&#35;
+
+Originally an autoport of JSON-LD-JAVA. Complete?
+
+* [https://github.com/NuGet/json-ld.net](https://github.com/NuGet/json-ld.net)
+
+#### Go
+
+Full support for JSON-LD spec. 
+
+[https://github.com/kazarena/json-gold](https://github.com/kazarena/json-gold)
+
+#### Javascript
+
+Probably the best choice currently, anecdotally, it is faster to have a node.js service instead of processing JSON-LD in certain other languages (I'm unconvinced, but I relay this experience as it is from someone I respect).
+
+* [https://github.com/digitalbazaar/jsonld.js/](https://github.com/digitalbazaar/jsonld.js/)
+
+#### Java
+
+Support for all aspects of JSON-LD processing, some discrepancies between handing in Java and Javascript, some small features not present.
+
+* [https://github.com/jsonld-java/jsonld-java](https://github.com/jsonld-java/jsonld-java)
+
+#### Perl
+
+Abandoned, somewhat complete projects.
+
+* [https://github.com/frezik/JSON-LD](https://github.com/frezik/JSON-LD) seems to be the most complete, but I have not tested it.
+* Catmandu?
+
+**Advice:** avoid processing JSON-LD in Perl, treat it like JSON; if you need to process JSON-LD, do it in a separate service in another language or contribute to the maintenance/creation of a suitable library.
+
+#### PHP
+
+Complete support for JSON-LD specs, written by Marcus Lanthaler.
+
+* [https://github.com/lanthaler/JsonLD](https://github.com/lanthaler/JsonLD)
+
+#### Python
+
+Two choices, complete?
+
+* [https://github.com/digitalbazaar/pyld](https://github.com/digitalbazaar/pyld)
+* [https://github.com/lanthaler/JsonLD](https://github.com/lanthaler/JsonLD)
+
+#### Ruby
+
+Support for all aspects of JSON-LD.
+
+* [https://github.com/ruby-rdf/json-ld/](https://github.com/ruby-rdf/json-ld/)
 
 ## Performance
 
