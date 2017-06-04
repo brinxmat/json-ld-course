@@ -1,0 +1,30 @@
+{
+  "@context": {
+    "@base": "http://example.org/example/",
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "a1",
+      "@type": "Thing",
+      "description": "Make this all pretty with @vocab and @base",
+      "quality": {
+        "@id": "../quality#HighQuality"
+      }
+    },
+    {
+      "@id": "a2",
+      "@type": "Thing",
+      "quality": {
+        "@id": "../quality#MediumQuality"
+      }
+    },
+    {
+      "@id": "a3",
+      "@type": "Thing",
+      "quality": {
+        "@id": "../quality#LowQuality"
+      }
+    }
+  ]
+}

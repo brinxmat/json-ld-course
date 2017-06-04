@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "description": "http://example.org/ontology#description",
+    "label": "http://example.org/ontology#label"
+  },
+  "description": "Edit the JSON-LD so that the language is specified for each label. Remember it is a new object and has an @value in addition to the @language",
+  "label": [
+    "Dette er på norsk og skal ha språktagget \"no\"",
+    "This is in English and should have language tag \"en\"",
+    "Add you favourite language with its tag"
+  ]
+}

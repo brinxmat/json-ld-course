@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "@base": "http://example.org/",
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@id": "concept/c0001",
+  "description": "Fix up this JSON-LD so that the languages are presented in a usable way using a language map",
+  "label": [
+    {
+      "@value": "Matchsticks",
+      "@language": "en"
+    },
+    {
+      "@value": "Fyrstikker",
+      "@language": "no"
+    },
+    {
+      "@value": "Tændstikker",
+      "@language": "da"
+    },
+    {
+      "@value": "Lucifers",
+      "@language": "nl"
+    },
+    {
+      "@value": "Allumettes",
+      "@language": "fr"
+    },
+    {
+      "@value": "Streichholzer",
+      "@language": "de"
+    },
+    {
+      "@value": "Mistos",
+      "@language": "ca"
+    },
+    {
+      "@value": "Zápalky",
+      "@language": "cs"
+    },
+    {
+      "@value": "Σπίρτα",
+      "@language": "el"
+    },
+    {
+      "@value": "Fósforos",
+      "@language": "pt"
+    },
+    {
+      "@value": "Tulitikut",
+      "@language": "fi"
+    },
+    {
+      "@value": "Chibrituri",
+      "@language": "ro"
+    }
+  ]
+}

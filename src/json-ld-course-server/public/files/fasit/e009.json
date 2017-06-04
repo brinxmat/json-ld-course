@@ -1,0 +1,33 @@
+{
+  "@context": {
+    "@base": "http://example.org/example/",
+    "@vocab": "http://example.org/ontology#",
+    "uri": "@id",
+    "type": "@type",
+    "graph": "@graph"
+  },
+  "graph": [
+    {
+      "uri": "a1",
+      "type": "Thing",
+      "description": "Get rid of all the '@' symbols using aliasing",
+      "quality": {
+        "uri": "../quality#HighQuality"
+      }
+    },
+    {
+      "uri": "a2",
+      "type": "Thing",
+      "quality": {
+        "uri": "../quality#MediumQuality"
+      }
+    },
+    {
+      "uri": "a3",
+      "type": "Thing",
+      "quality": {
+        "uri": "../quality#LowQuality"
+      }
+    }
+  ]
+}

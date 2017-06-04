@@ -1,0 +1,41 @@
+{
+  "@context": {
+    "@base": "http://example.org/",
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "work/w0002",
+      "@type": "Work",
+      "description": "Use a frame to make the Work the root node of the tree",
+      "contributor": {
+        "@id": "_:c001"
+      },
+      "genre": {
+        "@id": "genre/g0002"
+      },
+      "title": "Studies in a dying culture"
+    },
+    {
+      "@id": "_:c001",
+      "@type": "Contribution",
+      "contributionType": {
+        "@id": "contributionTypes/Author"
+      },
+      "agent": {
+        "@id": "agent/a0002"
+      }
+    },
+    {
+      "@id": "agent/a0002",
+      "@type": "Agent",
+      "name": "Caudwell, Christopher",
+      "birthDate": "1907-10-20",
+      "deathDate": "1937-02-12"
+    },
+    {
+      "@id": "genre/g0002",
+      "label": "Literary criticism"
+    }
+  ]
+}

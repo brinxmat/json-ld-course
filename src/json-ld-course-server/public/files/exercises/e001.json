@@ -1,0 +1,6 @@
+{
+  "task": "Using the ontology <http://example.org/ontology#>, add a context to the document, make it validate",
+  "label": "Exercise 1",
+  "date": "2017-06-4",
+  "creator": "Me"
+}

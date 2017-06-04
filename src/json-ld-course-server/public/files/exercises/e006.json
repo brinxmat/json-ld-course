@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "ontology": "http://example.org/ontology#",
+    "description": "ontology:description",
+    "bought": "ontology:bought"
+  },
+  "description": "Reverse the semantics of the relationship between the two references (remember to swap them!)",
+  "@id": "http://example.org/person/Sandy",
+  "bought": {
+    "@id": "http://example.org/food/Tomatoes"
+  }
+}

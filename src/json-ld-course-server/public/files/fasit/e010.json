@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@base": "http://example.org/",
+    "@vocab": "http://example.org/ontology#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "id": "@id",
+    "graph": "@graph",
+    "type": "@type",
+    "description": {
+      "@type": "xsd:string",
+      "@id": "description"
+    },
+    "title": {
+      "@type": "xsd:string",
+      "@id": "description"
+    },
+    "firstPublished": {
+      "@type": "xsd:gYear"
+    },
+    "contributor": {
+      "@type": "@id"
+    },
+    "publications": {
+      "@type": "@id"
+    },
+    "contributionType": {
+      "@type": "@id"
+    },
+    "agent": {
+      "@type": "@id"
+    },
+    "name": {
+      "@type": "xsd:string"
+    },
+    "birthDate": {
+      "@type": "xsd:date"
+    },
+    "nationality": {
+      "@type": "@id"
+    },
+    "year": {
+      "@type": "xsd:gYear"
+    },
+    "pages": {
+      "@type": "xsd:integer"
+    }
+  },
+  "graph": [
+    {
+      "id": "work/w0001",
+      "type": "Work",
+      "description": "The task here is to apply a type to everything possible, a bit boring, but there is a point title keep looking at NQuads!",
+      "title": "Nesnesitelná lehkost bytí",
+      "firstPublished": "1984",
+      "contributor": "_:c0001",
+      "publications": [
+        "publication/p0001",
+        "publication/p0002",
+        "publication/p0003"
+      ]
+    },
+    {
+      "id": "_:c0001",
+      "type": "Contribution",
+      "contributionType": "contributionTypes/author",
+      "agent": "agent/a0001"
+    },
+    {
+      "id": "agent/a0001",
+      "type": "Agent",
+      "name": "Kundera, Milan",
+      "birthDate": "1929-04-01",
+      "nationality": "nationality/France"
+    },
+    {
+      "id": "publication/p001",
+      "type": "Publication",
+      "title": "Nesnesitelná lehkost bytí",
+      "year": "1985",
+      "pages": "344"
+    },
+    {
+      "id": "publication/p002",
+      "type": "Publication",
+      "title": "L'insoutenable légèreté de l'être",
+      "year": "1984",
+      "pages": "393"
+    },
+    {
+      "id": "publication/p003",
+      "type": "Publication",
+      "title": "La insuportable lleugeresa de l'ésser",
+      "year": "2015",
+      "pages": "320"
+    }
+  ]
+}

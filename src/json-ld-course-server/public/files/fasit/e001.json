@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "task": "http://example.org/ontology#task",
+    "label": "http://example.org/ontology#label",
+    "date": "http://example.org/ontology#date",
+    "creator": "http://example.org/ontology#creator"
+  },
+  "task": "Using the ontology <http://example.org/ontology#>, add a context to the document, make it validate",
+  "label": "Exercise 1",
+  "date": "2017-06-4",
+  "creator": "Me"
+}

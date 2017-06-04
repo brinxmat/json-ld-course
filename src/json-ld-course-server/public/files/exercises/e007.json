@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "ontology": "http://example.org/ontology#",
+    "description": "ontology:description",
+    "Book": "ontology:Book",
+    "title": "ontology:title",
+    "contributor": "ontology:contributor",
+    "collectionNumber": "ontology:collectionNumber",
+    "readingList": "ontology:readingList"
+  },
+  "description": "Make it so that the indexer can ignore the course codes (Q100, Q101 and DA19). Keep an eye on NQuads view!",
+  "@id": "http://example.org/books",
+  "readingList": {
+    "Q100": {
+      "title": "Something about fish",
+      "contributor": "A. Name"
+    },
+    "Q101": {
+      "title": "Something about fish",
+      "contributor": "A. Name"
+    },
+    "DA19": {
+      "title": "Something not about fish",
+      "contributor": "B. Name"
+    }
+  }
+}

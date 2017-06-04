@@ -1,0 +1,17 @@
+{
+  "@context": {
+    "ontology": "http://example.org/ontology#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "description": "ontology:description",
+    "label": "ontology:label",
+    "year": {
+      "@id": "ontology:year",
+      "@type": "xsd:gYear"
+    }
+  },
+  "@id": "http://example.org/car/TeslaModelS",
+  "@type": "ontology:Car",
+  "description": "Extend the @context, add a @type to the node, add a @type xsd:gYear to the year object label i.e. not in the context",
+  "label": "Tesla Model S",
+  "year": "2017"
+}

@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "ontology": "http://example.org/ontology#",
+    "title": "ontology:title",
+    "description": "ontology:description",
+    "actor": {
+      "@id": "ontology:actor",
+      "@container": "@set"
+    }
+  },
+  "@id": "http://example.org/film/e005",
+  "description": "Coerce objects of \"actor\" property to an array as most films have multiple actors",
+  "title": "One-man show",
+  "actor": "Kim Smith"
+}

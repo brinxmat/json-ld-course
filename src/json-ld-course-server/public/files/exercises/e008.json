@@ -1,0 +1,26 @@
+{
+  "@graph": [
+    {
+      "@id": "http://example.org/example/a1",
+      "http://example.org/ontology#description": "Make this all pretty with @vocab and @base",
+      "@type": "http://example.org/ontology#Thing",
+      "http://example.org/ontology#quality": {
+        "@id": "http://example.org/ontology#HighQuality"
+      }
+    },
+    {
+      "@id": "http://example.org/example/a2",
+      "@type": "http://example.org/ontology#Thing",
+      "http://example.org/ontology#quality": {
+        "@id": "http://example.org/ontology#MediumQuality"
+      }
+    },
+    {
+      "@id": "http://example.org/example/a3",
+      "@type": "http://example.org/ontology#Thing",
+      "http://example.org/ontology#quality": {
+        "@id": "http://example.org/ontology#LowQuality"
+      }
+    }
+  ]
+}
