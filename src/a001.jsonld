@@ -1,6 +1,0 @@
-  "@context": {
-    "course": "http://github.com/brinxmat/json-ld-course/src/a001#",
-    "name": "course:name",
-    "birthDate": "course:birthDate",
-    "nationality": "course:nationality"
-  }

@@ -61,7 +61,7 @@ In the ECMA-404 specification (each new line is a data structure):
 true
 null
 ```
-### Issues with the JSON format
+### Limitations of the JSON format
 
 - No support for data structures beyond boolean, number, string, object, array, null
 - JSON sort-of executable JavaScript
@@ -194,14 +194,14 @@ From this document, the motivations behind JSON-LD are clear:
 
 So what is JSON-LD?
 
-* a graph data model in JSON
+* a graph data model in JSON (a document?)
 * somewhat compatible with RDF
-* JSON
+* it is JSON if it is nothing else
 * a format for linked data on the Web
 
 ## Javascript Object Notation for Linking Data
 
-Note that the name JSON-LD is not "linked data", but "for linking data". Linked data is — whether we like it or not — closely tied to RDF and the traditional semantic web, even though this is not necessarily entailed by the term (RDF is simply a *best practice recommendation* in Berners-Lee's [Five star linked data concept](https://www.w3.org/DesignIssues/LinkedData.html)). 
+Note that the LD in the name JSON-LD is not "linked data", but "for linking data". Linked data is — whether we like it or not — closely tied to RDF and the traditional semantic web, even though this is not necessarily entailed by the term (RDF is simply a *best practice recommendation* in Berners-Lee's [Five star linked data concept](https://www.w3.org/DesignIssues/LinkedData.html)). 
 
 JSON-LD provides a packaging for data that allows us to use linked data in a simple way that will not get in the way for users who are not interested in the semantics of the terms, but just want quick-and-dirty access to the data. This means for most native JSON-LD that little tooling is required beyond the standard JSON parser, which means that developers don't need to care about or understand the Semantic Web to use the data.
 
@@ -216,6 +216,17 @@ Nevertheless, getting data from such a utilitarian data model to a suitable disp
 JSON-LD's compatibility with RDF provides a solution to several of the problems perceived by front-end developers who are unfamiliar with RDF — at the same time as providing direct support for linked data. This is a win-win.
 
 Those that want to use RDF, SPARQL and the Semantic Web stack can, those that want to use document stores can and those that produce data from other sources can mark up data from their APIs to make them "semantic" in a quick and simple way.
+
+Suffice to say, you can use JSON-LD:
+
+* As JSON, as a document
+* As a step between RDF and HTML
+
+## The approach we will take here
+
+We start by looking at the basic structures in JSON-LD, building up valid JSON-LD documents that demonstrate the way in which JSON-LD can be used to mark up data so that it can be interpreted semantically.
+
+We will look at how framing can be used to create views of existing JSON-LD documents, how this can be used in 
 
 ## First steps
 
@@ -242,9 +253,8 @@ Simplest way:
     "nationality": "British"
 }
 ```
-Here we simply add a "@context" to the JSON, think of "@context" in the same way you would if someone talked about a context for a discussion — a way of making it clear what we're talking about and thereby how to interpret the terms that are used. Thus, we are not talking about "name", "birthDate" and "nationality" in general terms, we are talking about them in specific terms — the terms defined by the context.
 
-Looking at the data on the different tabs, we notice that the context has been applied, so that *name* is now equivalent to *http://localhost:3211/context/a001#name*.
+In JSON-LD playground, looking at the data on the different tabs, we notice that the context has been applied, so that *name* is now equivalent to *http://localhost:3211/context/a001#name*.
 
 The context here is a file that can be dereferenced, the vocabulary it defines applies to the entire JSON document; this is similar to namespaced vocabularies in RDF.
 
@@ -277,6 +287,269 @@ Rather than simply linking to the context-document, we could have included it di
   "nationality": "British"
 }
 ```
+
+### Terms
+
+In JSON-LD there are a number of keywords prefixed with **@**, these are called **terms**. We will quickly cover the basic terms.
+
+#### @context
+
+We start with **@context** because we have already seen the **@context** object at work.
+
+Think of **@context** in the same way you would if someone talked about a **context for a discussion** — a way of making it clear what we're talking about and thereby how to interpret the terms that are used. 
+
+Thus, we are not talking about a generic concept "name", we are talking the specific concept in our ontology.
+
+**@context** can, as we have seen, be an IRI, which is dereferenced or an object.
+
+#### @id
+
+JSON-LD introduces **@id** to provide support for IRIs as universal identifiers. This is probably the biggest innovation in JSON-LD, but also one it is easy to forget because it is often implicit*.
+
+**@id** allows us to say that objects have a specific IRI and refer to these, thus we can say that **an object** has **an identifier**, and that it is related to **another object** that has **another identifier**.
+
+*NB:* @id works at the level of **object**, which mean that there is no **document** IRI concept in JSON-LD.
+
+#### @value
+With many properties, you just want a bare value, say 2, "Nice" or false, other times, you want to say more about the object of the property, here **@value** allows us to say that there is a value for the property, which can then be augmented with other data.
+
+#### @language
+
+We often want to talk about the language of a property, with **@language** and **@value** we can create an object that has a language:
+
+```
+{
+	"@context": {
+		"weather": "http://example.com/ontology#weather"
+	},
+	"weather": {
+		"@value": "Solen skinner",
+		"@language": "no"
+	}
+}
+```
+It is possible to use **@language** to set a default language for the document:
+
+```
+{
+	"@context": {
+		"weather": "http://example.com/ontology#weather",
+      "@language": "no"
+    },
+	"weather": "Solen skinner"
+}
+```
+
+We return to the language concepts in JSON-LD later in more detail.
+
+#### @type
+
+Datatypes for nodes or typed values are expressed with an **@type** keyword.
+
+```
+{
+	"@context": {
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"label": "http://example.com/ontology#label",
+		"date": "http://example.com/ontology#date",
+		"DateOfThingHappeningClass": "http://example.com/ontology#DateOfThingHappening"
+	},
+	"@type": "DateOfThingHappening",
+	"label": "By Grand Central station, I sat down and wept",
+	"date": {
+		"@value": "2012-02-21",
+		"@type": "xsd:date"
+	}
+}
+```
+
+**NB:** here I introduce (see: *xsd*) a what is called a compacted IRI in JSON-LD-speak, this is similar to an XML namespace. We will come back to this again in a moment.
+
+In this example, we have an event where I sat down and wept, this event is represented by an object with the type "DateOfThingHappening"; the object of the *date* property has a type of *xsd:date*, which is interpreted as an ISO-8601 compatible date.
+
+#### @container, @set and @list
+
+The **@container** keyword allows us to associate a specific type for container objects; this sounds tautological, but the syntax of JSON-LD allows for two kinds of syntactic container: arrays in all cases except language maps (which we will come back to in detail below).
+
+In JSON-LD an array is generally considered to be an unordered list; one can specify that an array is explicitly unordered by using the *@set* keyword. 
+
+In cases where an explicitly ordered list is required, the *@list* keyword can be used.
+
+```
+{
+	"@context": {
+		"names": {
+			"@id": "http://localhost:3211/ontology#names",
+			"@container": "@set"
+		},
+		"alphabeticalNames": {
+			"@id": "http://localhost:3211/ontology#alphabeticalNames",
+			"@container": "@list"
+		}
+	},
+	"names": ["Jim", "Jimmy", "Jimmie", "Jimi", "James", "Jimbo"],
+	"alphabeticalNames": ["James", "Jim", "Jimbo", "Jimi", "Jimmie", "Jimmy"]
+}
+```
+
+#### @reverse
+
+The **@reverse** term reverses property's relational semantics, thus if we have a term *eats*, applying **@reverse** to it makes it semantically equivalent to *eatenBy* and the term can be used to relate an edible item to its eaters. For example:
+
+Normal usage:
+
+```
+{
+    "@context": {
+        "eats": "http://example.org/ontology#eats"
+    },
+    "@id": "http://example.org/people/Sandy",
+    "eats": "http://example.org/food/Cake"
+}
+```
+With **@reverse**:
+
+```
+{
+    "@context": {
+        "eats": "http://example.org/ontology#eats"
+    },
+    "@id": "http://example.org/food/Cake",
+    "@reverse": {
+        "eats": {
+            "@id": "http://example.org/people/Sandy"
+        }
+    }
+}
+```
+
+The way this works becomes much clearer with the NQuads view, where the roles of the subject and object are swapped.
+
+#### @container, @index
+
+Using the **@index** term makes data access easy, it adds a syntactic abstraction layer that makes it easy for programs to get the data in a predefined way.
+
+For example, given a data structure for a controlled vocabulary that is not marked up with **@index**:
+
+```
+{
+	"@context": {
+		"concept": "http://example.com/ontology#concept",
+		"translation": "http://example.com/ontology#translation",
+		"label": "http://example.com/ontology#label",
+		"language": "http://example.com/ontology#language"
+	},
+	"@id": "http://example.com/concept/N0001",
+	"label": "Schadefreude",
+	"translation": [{
+			"language": "German",
+			"label": "Schadenfreude"
+		},
+		{
+			"language": "English",
+			"label": "Schadenfreude"
+		}
+	]
+}
+```
+This makes it quite hard to access the terms in the data in a way that makes sense if one wants to present entry points based on language.
+
+In order to do this, you can add the **@index** as the **@container**:
+
+```
+{
+	"@context": {
+		"concept": "http://example.com/ontology#concept",
+		"translation": {
+			"@id": "http://example.com/ontology#translation",
+			"@container": "@index"
+		},
+		"label": "http://example.com/ontology#label",
+		"language": "http://example.com/ontology#language"
+	},
+	"@id": "http://example.com/concept/N0001",
+	"label": "Schadefreude",
+	"translation": {
+		"de": {
+			"language": "German",
+			"label": "Schadenfreude"
+		},
+		"en": {
+			"language": "English",
+			"label": "Schadenfreude"
+		}
+	}
+}
+```
+
+This second data structure is syntactically different to the first, but semantically identical. The keys "de" and "en" are completely ignored when converting to RDF, while a developer can access the data by requesting:
+
+```const german = object.translation.de.label```
+
+This means that the code doesn't have to dig deep into the data structure to analyse what there is and what is needed.
+
+We used a language based example here, we'll return with more examples reagarding languages later.
+
+#### @base, @vocab
+
+In the same way as most other serialisations, it is possible to set base values for things used in the JSON-LD document. 
+
+The **@base** keyword allows us to set a IRI base for relative IRIs (setting ```"@base": "http://example.com/people/"``` will expand ```"@id": "1/Kim"``` to ```"@id": "http://example.com/people/1/Kim"``` . 
+
+Similarly, a base value can be set for vocabulary items with the **@vocab** element, so that we can set ```"@vocab": "http://example.org/ontology#"``` and expect all relative properties and types to be expanded with this.
+
+```
+{
+	"@context": {
+		"@base": "http://example.org/person/",
+		"@vocab": "http://example.org/ontology#"
+	},
+	"@id": "1/Kim",
+	"age": 15,
+	"name": "Kim"
+}
+```
+#### @graph
+
+JSON-LD implements a graph in JSON, as this is the case, all data is contained in a "@graph", in cases where we have a single object, this will not be apparent unless one views the data in a specific way (flattened, we'll come back to this shortly) because the default graph that exists independently of everything else is suppressed when one only has one object.
+
+In cases where we want to use named graphs — say to compare new and old data — we can do so:
+
+```
+{
+	"@context": {
+		"@base": "http://example.org/person/",
+		"@vocab": "http://example.org/ontology#"
+	},
+	"@graph": [{
+			"@id": "http://example.org/graph/original",
+			"@graph": [{
+				"@id": "1/Kim",
+				"age": 15,
+				"name": "Kim"
+			}]
+		},
+		{
+			"@id": "http://example.org/graph/update",
+			"@graph": [{
+				"@id": "1/Kim",
+				"age": 16,
+				"name": "Kim"
+			}]
+		}
+	]
+}
+```
+
+#### @nest
+
+I can't get this to work. It looks quite cool, it allows a nested object that collects key/values, so say all prefLabels and altLabels are in one object, which would make some indexing tasks easier.
+
+#### @version
+
+I can't get this to work. It allows the **@context** to specify a value for **@version** (say "1.1"), which is the intent/compatibility level for the context. This secures compatibility over time if breaking changes in behaviour come in new versions. 
+
+Compatibility level can be specified when initialising the JSON-LD parser.
 
 ### Different representations of JSON-LD
 
@@ -1019,34 +1292,639 @@ Or we can embed it:
 
 > What happens if a references b, which references a?
 
-### Containers
+## Framing
 
-$$$$$$$$ Describe the container concept $$$$$$
+Framing allows us to force specific tree layouts on a JSON-LD **document**.
 
-#### Sets and lists
+It's worth remembering that a serialised JSON-LD document can be structured in many different ways and still be valid. In order for JSON-LD to be usable for developers, there needs to be a simple way to force a deterministic layout for the graph.
 
-This should really be covered further up.
+Put simply, JSON-LD Framing is an effective way of manipulating the JSON-LD that other APIs deliver so that it works for your purposes. This means that the JSON you end up working can be structured in an optimal way for what you are trying to do by applying a frame.
 
-In JSON-LD an array is generally considered to be an unordered list; one can specify that an array is explicitly unordered by using the *@set* keyword. 
+### First step, creating a frame
 
-In cases where an explicitly ordered list is required, the *@list* keyword can be used.
+We have a document that contains a graph that contains five nodes, one that is a Concept and four that are simply terms that are sometimes used (this is modelled to some extent after a simplified MeSH):
+
+```
+{
+	"@graph": [{
+			"@id": "http://example.org/concept/Fish",
+			"@type": "http://example.org/ontology#Concept",
+			"http://example.org/ontology#label": "Fish",
+			"http://example.org/ontology#nonPreferredTerm": [{
+					"@id": "http://example.org/term/Fishie"
+				},
+				{
+					"@id": "http://example.org/term/Poisson"
+				},
+				{
+					"@id": "http://example.org/term/Fisch"
+				},
+				{
+					"@id": "http://example.org/term/Fisk"
+				}
+			]
+		},
+		{
+			"@id": "http://example.org/term/Fishie",
+			"@type": "http://example.org/ontology#Term",
+			"http://example.org/ontology#label": "Fishie"
+
+		},
+		{
+			"@id": "http://example.org/term/Poisson",
+			"@type": "http://example.org/ontology#Term",
+			"http://example.org/ontology#label": "Poisson"
+
+		},
+		{
+			"@id": "http://example.org/term/Fisch",
+			"@type": "http://example.org/ontology#Term",
+			"http://example.org/ontology#label": "Fisch"
+
+		},
+		{
+			"@id": "http://example.org/term/Fisk",
+			"@type": "http://example.org/ontology#Term",
+			"http://example.org/ontology#label": "Fisk"
+
+		}
+	]
+}
+```
+
+This looks a lot like a mess, so what can we do to clean it up?
+
+Note that I have been very careful about giving all of my nodes a **@type**. This can help us. I want to restructure this so that my document is easier to work with; I suspect that the entry point for my restructured document tree should look something like this:
+
+```
+- Concept
+     |
+     |
+     - Terms
+```
+This means I can say ```const terms = concept.terms```, when I want to access the data, but how do I get there?
+
+Let's apply the simplest frame of all.
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "uri": "@id"
+  },
+  "@type": "Concept"
+}
+```
+Pausing for just a moment, it's worth noting the structure here; we have a **@context** that contains the usual things, and then we have the magic ```"@type": "Concept"```, which is the frame. Note that you will be getting confused when you work with these things because a lot of times we refer to the same key in the **@context** and the frame — you will end up getting frustrated because you've edited the wrong thing. Accept it now; know that this is a common error and things will be much better.
+
+This frame produces a new document that is restructured like we had imagined:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "uri": "@id",
+    "graph": "@graph",
+    "type": "@type"
+  },
+  "graph": [
+    {
+      "uri": "http://example.org/concept/Fish",
+      "type": "Concept",
+      "label": "Fish",
+      "nonPreferredTerm": [
+        {
+          "uri": "http://example.org/term/Fishie",
+          "type": "Term",
+          "label": "Fishie"
+        },
+        {
+          "uri": "http://example.org/term/Poisson",
+          "type": "Term",
+          "label": "Poisson"
+        },
+        {
+          "uri": "http://example.org/term/Fisch",
+          "type": "Term",
+          "label": "Fisch"
+        },
+        {
+          "uri": "http://example.org/term/Fisk",
+          "type": "Term",
+          "label": "Fisk"
+        }
+      ]
+    }
+  ]
+}
+```
+
+That was quite successful, I can now request every label in the document by selecting ```document.graph.nonPreferredTerm[index].label```.
+
+This behaviour seems to indicate that the framing algorithm attempts to embedd nodes by default. We will look at embedding in detail in  a moment.
+
+### What does the framing algorithm actually do?
+
+>The Framing Algorithm […] first [expands] both the input frame and document. It then creates a map of flattened subjects. The outer-most node object within the frame is used to match objects in the map, in this case looking for node objects which have an @type of [Concept], and a contains property with another frame used to match values of that property. The input document contains exactly one such node object. The value of contains also has a node object, which is then treated as a frame to match the set of subjects which are contains values of the [Concept] object…
+
+[JSON-LD Framing 1.1](https://json-ld.org/spec/latest/json-ld-framing/)
+
+### @default: taking things not being there into account
+
+Let's say we have the following data:
 
 ```
 {
 	"@context": {
-		"names": {
-			"@id": "http://localhost:3211/ontology#names",
-			"@container": "@set"
-		},
-		"alphabeticalNames": {
-			"@id": "http://localhost:3211/ontology#alphabeticalNames",
-			"@container": "@list"
-		}
+		"@vocab": "http://example.org/ontology#"
 	},
-	"names": ["Jim", "Jimmy", "Jimmie", "Jimi", "James", "Jimbo"],
-	"alphabeticalNames": ["James", "Jim", "Jimbo", "Jimi", "Jimmie", "Jimmy"]
+	"@graph": [{
+			"@id": "http://example.org/item/a0001",
+			"@type": "Item",
+			"title": "About a boy",
+			"description": "A film about a boy"
+		},
+		{
+			"@id": "http://example.org/item/a0002",
+			"@type": "Item",
+			"title": "The hobbit"
+		},
+		{
+			"@id": "http://example.org/sale/a0001",
+			"@type": "SaleItem",
+			"saleItems": [{
+					"@id": "http://example.org/item/a0001"
+				},
+				{
+					"@id": "http://example.org/item/a0002"
+				}
+			]
+		}
+	]
 }
 ```
+
+And we'd like to make sure that the data is structured so that we can get each sale item in a way similar to the previous example; in this case, we also want to ensure that the data is uniformly structured and as some information is missing, we want to add that back in:
+
+```
+{
+	"@context": {
+		"@vocab": "http://example.org/ontology#",
+		"type": "@type",
+		"graph": "@graph",
+		"uri": "@id"
+	},
+	"type": "SaleItem",
+	"saleItems": {
+		"type": "Item",
+		"description": {
+			"@default": "No description available"
+		}
+	}
+}
+```
+The **@default** term provides us with a way of giving the description a default value (in reality, this might be ```null```).
+
+The result:
+
+```
+{
+	"@context": {
+		"@vocab": "http://example.org/ontology#",
+		"type": "@type",
+		"graph": "@graph",
+		"uri": "@id"
+	},
+	"graph": [{
+		"uri": "http://example.org/sale/a0001",
+		"type": "SaleItem",
+		"saleItems": [{
+				"uri": "http://example.org/item/a0001",
+				"type": "Item",
+				"description": "A film about a boy",
+				"title": "About a boy"
+			},
+			{
+				"uri": "http://example.org/item/a0002",
+				"type": "Item",
+				"description": "No description available",
+				"title": "The hobbit"
+			}
+		]
+	}]
+}
+```
+### Controlling embedding
+
+Let's take a look at the previous example, but use a new frame:
+
+```
+{
+	"@context": {
+		"@vocab": "http://example.org/ontology#",
+		"type": "@type",
+		"graph": "@graph",
+		"uri": "@id"
+	},
+	"type": "SaleItem",
+	"saleItems": {
+		"type": "Item",
+		"@embed":"@never"
+	}
+}
+```
+The result looks like this:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "type": "@type",
+    "graph": "@graph",
+    "uri": "@id"
+  },
+  "graph": [
+    {
+      "uri": "http://example.org/sale/a0001",
+      "type": "SaleItem",
+      "saleItems": [
+        {
+          "uri": "http://example.org/item/a0001"
+        },
+        {
+          "uri": "http://example.org/item/a0002"
+        }
+      ]
+    }
+  ]
+}
+```
+Using ```"@embed": "@never"``` causes the node object to be omitted, in its place, there is a reference. This can be useful in contexts where the data is loaded asyncronously.
+
+We can also use ```"@embed": "@last"``, the following example demonstrates some of the functionality. We have a series of three books by Knausgaard, 
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "@base": "http://example.org/example/"
+  },
+  "@graph": [
+    {
+      "@id": "book1",
+      "@type": "Book",
+      "title": "My Struggle: Book 1",
+      "contributor": {
+        "@id": "Knausgaard"
+      },
+      "illustrator": {
+        "@id": "Knausgaard"
+      }
+    },
+    {
+      "@id": "book2",
+      "@type": "Book",
+      "title": "My Struggle: Book 2",
+      "contributor": {
+        "@id": "Knausgaard"
+      },
+      "illustrator": {
+        "@id": "Knausgaard"
+      }
+    },
+    {
+      "@id": "book3",
+      "@type": "Book",
+      "title": "My Struggle: Book 3",
+      "contributor": {
+        "@id": "Knausgaard"
+      },
+      "illustrator": {
+        "@id": "Knausgaard"
+      }
+    },
+    {
+      "@id": "Knausgaard",
+      "name": "Knausgaard, Karl Ove"
+    }
+  ]
+}
+```
+
+Using the following frame, we can see how ```"@embed": "@last"``` affects only node-internal embedding, not graph-wide embedding.
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@embed": "@last",
+  "@type": "Book"
+}
+```
+Because Knausgaard is both contributor and illustrator for the book, the two references occur in the same node. As a consequence, we see that only one is embedded in each node:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/example/book1",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "title": "My Struggle: Book 1"
+    },
+    {
+      "@id": "http://example.org/example/book2",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "title": "My Struggle: Book 2"
+    },
+    {
+      "@id": "http://example.org/example/book3",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "title": "My Struggle: Book 3"
+    }
+  ]
+}
+```
+Contrast this with the same, where the flag is set to "@always":
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/example/book1",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "title": "My Struggle: Book 1"
+    },
+    {
+      "@id": "http://example.org/example/book2",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "title": "My Struggle: Book 2"
+    },
+    {
+      "@id": "http://example.org/example/book3",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard",
+        "name": "Knausgaard, Karl Ove"
+      },
+      "title": "My Struggle: Book 3"
+    }
+  ]
+}
+```
+And finally, never:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/example/book1"
+    },
+    {
+      "@id": "http://example.org/example/book2"
+    },
+    {
+      "@id": "http://example.org/example/book3"
+    }
+  ]
+}
+```
+
+If we alter the frame, we can get the expected result:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "contributor": {
+    "@embed": "@never"
+  },
+  "illustrator": {
+    "@embed": "@never"
+  }
+}
+```
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/example/book1",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "title": "My Struggle: Book 1"
+    },
+    {
+      "@id": "http://example.org/example/book2",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "title": "My Struggle: Book 2"
+    },
+    {
+      "@id": "http://example.org/example/book3",
+      "@type": "Book",
+      "contributor": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "illustrator": {
+        "@id": "http://example.org/example/Knausgaard"
+      },
+      "title": "My Struggle: Book 3"
+    }
+  ]
+}
+```
+
+There is a final term that can be used with **@embed**, **@link**, which is defined in the following way:
+
+> In the in-memory internal representation, nodes are linked directly, which allows for circular references. 
+
+[JSON-LD Framing 1.1](https://json-ld.org/spec/latest/json-ld-framing)
+
+The effect that this has is not apparent outside the processor (c.f. question above about a -> b -> a, circular relationships).
+
+How embedding works by default is controlled by passing an **embed** flag the JSON-LD processor
+
+### @explicit: controlling what is shown
+
+Other times, it is relevant to show only some of the data, for example, a very full description of an item is not necessary for a search preview, so the data can be reduced:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/item/a0001",
+      "@type": "Item",
+      "title": "About a boy",
+      "description": "A film about a boy",
+      "something": "blah, blah",
+      "somethingElse": "blah, blah, blah"
+    },
+    {
+      "@id": "http://example.org/item/a0002",
+      "@type": "Item",
+      "title": "The hobbit",
+      "yetAnotherThing": "blah, blah",
+      "creator": "Tolkein, J. R. R."
+    }
+ ]
+}
+```
+To get rid of the information we don't want, we can apply a frame of the following kind:
+
+```
+{
+	"@context": {
+		"@vocab": "http://example.org/ontology#",
+		"graph": "@graph",
+		"uri": "@id"
+	},
+	"@type": "Item",
+    "title": {},
+    "creator": {},
+    "@explicit": true
+}
+```
+Here we have done two things, one, we have specified the things we really want in the frame (type, title, creator) and secondly, we have said ```"@xplicit": true```, which ensures that only the things we have explicitly said to include are there.
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "graph": "@graph",
+    "uri": "@id"
+  },
+  "graph": [
+    {
+      "uri": "http://example.org/item/a0001",
+      "@type": "Item",
+      "creator": null,
+      "title": "About a boy"
+    },
+    {
+      "uri": "http://example.org/item/a0002",
+      "@type": "Item",
+      "creator": "Tolkein, J. R. R.",
+      "title": "The hobbit"
+    }
+  ]
+}
+```
+Note: This behaviour can also be set by passing the **explicit** option to the JSON-LD processor.
+
+### @omitDefault
+
+Using the previous frame has one unfortunate consequence, a ```null``` value has crept in because we have no creator for the film. This can be remedied by adjusting the frame, using the **@omitDefault** term:
+
+```
+{
+	"@context": {
+		"@vocab": "http://example.org/ontology#",
+		"graph": "@graph",
+		"uri": "@id"
+	},
+  "@omitDefault": true,
+	"@type": "Item",
+    "title": {},
+    "creator": {"@omitDefault": true},
+    "@explicit": true
+}
+```
+
+**NB:** the same can be achieved by passing the **omitDefault** flag to the JSON-LD processor.
+
+The result:
+
+```
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "graph": "@graph",
+    "uri": "@id"
+  },
+  "graph": [
+    {
+      "uri": "http://example.org/item/a0001",
+      "@type": "Item",
+      "title": "About a boy"
+    },
+    {
+      "uri": "http://example.org/item/a0002",
+      "@type": "Item",
+      "creator": "Tolkein, J. R. R.",
+      "title": "The hobbit"
+    }
+  ]
+}
+```
+
+
 
 
 ## Programming with JSON-LD
@@ -1140,6 +2018,8 @@ W3C. 2014. [JSON-LD 1.0 Processing Algorithms and API](https://www.w3.org/TR/jso
 Sporny, Manu. 2014. [JSON-LD and Why I Hate the Semantic Web](http://manu.sporny.org/2014/json-ld-origins-2/). Accessed 2017-05-20.
 
 Sporny, Manu. 2016. [JSON-LD context caching](http://manu.sporny.org/2016/json-ld-context-caching/). Accessed (via Wayback Machine): 2017-05-30.
+
+W3C. 2017. [JSON-LD Framing 1.1](https://json-ld.org/spec/latest/json-ld-framing/). Accessed 2017-06-03.
 
 ### JSON Schema
 
