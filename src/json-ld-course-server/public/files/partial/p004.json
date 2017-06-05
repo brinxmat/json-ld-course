@@ -1,0 +1,28 @@
+{
+  "@context": {
+    "names": {
+      "@id": "http://localhost:3211/ontology#names",
+      "@container": "@set"
+    },
+    "alphabeticalNames": {
+      "@id": "http://localhost:3211/ontology#alphabeticalNames",
+      "@container": "@list"
+    }
+  },
+  "names": [
+    "Jim",
+    "Jimmy",
+    "Jimmie",
+    "Jimi",
+    "James",
+    "Jimbo"
+  ],
+  "alphabeticalNames": [
+    "James",
+    "Jim",
+    "Jimbo",
+    "Jimi",
+    "Jimmie",
+    "Jimmy"
+  ]
+}

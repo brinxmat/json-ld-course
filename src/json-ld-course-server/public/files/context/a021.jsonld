@@ -1,0 +1,7 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@embed": "@always",
+  "@type": "Book"
+}

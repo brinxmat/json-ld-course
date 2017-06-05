@@ -1,0 +1,14 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "label": "http://example.com/ontology#label",
+    "date": "http://example.com/ontology#date",
+    "DateOfThingHappeningClass": "http://example.com/ontology#DateOfThingHappening"
+  },
+  "@type": "DateOfThingHappening",
+  "label": "By Grand Central station, I sat down and wept",
+  "date": {
+    "@value": "2012-02-21",
+    "@type": "xsd:date"
+  }
+}

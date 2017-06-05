@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "@base": "http://example.org/person/",
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@id": "1/Kim",
+  "age": 15,
+  "name": "Kim"
+}

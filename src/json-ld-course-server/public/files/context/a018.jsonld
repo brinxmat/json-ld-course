@@ -1,0 +1,15 @@
+{
+	"@context": {
+		"@vocab": "http://example.org/ontology#",
+		"type": "@type",
+		"graph": "@graph",
+		"uri": "@id"
+	},
+	"type": "SaleItem",
+	"saleItems": {
+		"type": "Item",
+		"description": {
+			"@default": "No description available"
+		}
+	}
+}

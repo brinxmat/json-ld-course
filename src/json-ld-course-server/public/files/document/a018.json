@@ -1,0 +1,28 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [{
+    "@id": "http://example.org/item/a0001",
+    "@type": "Item",
+    "title": "About a boy",
+    "description": "A film about a boy"
+  },
+    {
+      "@id": "http://example.org/item/a0002",
+      "@type": "Item",
+      "title": "The hobbit"
+    },
+    {
+      "@id": "http://example.org/sale/a0001",
+      "@type": "SaleItem",
+      "saleItems": [{
+        "@id": "http://example.org/item/a0001"
+      },
+        {
+          "@id": "http://example.org/item/a0002"
+        }
+      ]
+    }
+  ]
+}

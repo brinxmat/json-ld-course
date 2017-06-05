@@ -1,0 +1,23 @@
+{
+  "@context": {
+    "@base": "http://example.org/person/",
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@graph": [{
+    "@id": "http://example.org/graph/original",
+    "@graph": [{
+      "@id": "1/Kim",
+      "age": 15,
+      "name": "Kim"
+    }]
+  },
+    {
+      "@id": "http://example.org/graph/update",
+      "@graph": [{
+        "@id": "1/Kim",
+        "age": 16,
+        "name": "Kim"
+      }]
+    }
+  ]
+}

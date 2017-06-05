@@ -1,0 +1,7 @@
+{
+  "@context": {
+    "eats": "http://example.org/ontology#eats"
+  },
+  "@id": "http://example.org/people/Sandy",
+  "eats": "http://example.org/food/Cake"
+}

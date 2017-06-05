@@ -1,0 +1,19 @@
+{
+  "@context": {
+    "concept": "http://example.com/ontology#concept",
+    "translation": "http://example.com/ontology#translation",
+    "label": "http://example.com/ontology#label",
+    "language": "http://example.com/ontology#language"
+  },
+  "@id": "http://example.com/concept/N0001",
+  "label": "Schadefreude",
+  "translation": [{
+    "language": "German",
+    "label": "Schadenfreude"
+  },
+    {
+      "language": "English",
+      "label": "Schadenfreude"
+    }
+  ]
+}

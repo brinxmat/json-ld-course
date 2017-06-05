@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/ontology#",
+    "@base": "http://example.org/example/"
+  },
+  "@graph": [
+    {
+      "@id": "book1",
+      "@type": "Book",
+      "title": "My Struggle: Book 1",
+      "contributor": {
+        "@id": "Knausgaard"
+      },
+      "illustrator": {
+        "@id": "Knausgaard"
+      }
+    },
+    {
+      "@id": "book2",
+      "@type": "Book",
+      "title": "My Struggle: Book 2",
+      "contributor": {
+        "@id": "Knausgaard"
+      },
+      "illustrator": {
+        "@id": "Knausgaard"
+      }
+    },
+    {
+      "@id": "book3",
+      "@type": "Book",
+      "title": "My Struggle: Book 3",
+      "contributor": {
+        "@id": "Knausgaard"
+      },
+      "illustrator": {
+        "@id": "Knausgaard"
+      }
+    },
+    {
+      "@id": "Knausgaard",
+      "name": "Knausgaard, Karl Ove"
+    }
+  ]
+}

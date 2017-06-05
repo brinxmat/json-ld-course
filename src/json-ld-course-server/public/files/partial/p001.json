@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "weather": "http://example.com/ontology#weather"
+  },
+  "weather": {
+    "@value": "Solen skinner",
+    "@language": "no"
+  }
+}

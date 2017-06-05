@@ -1,0 +1,45 @@
+{
+  "@graph": [{
+    "@id": "http://example.org/concept/Fish",
+    "@type": "http://example.org/ontology#Concept",
+    "http://example.org/ontology#label": "Fish",
+    "http://example.org/ontology#nonPreferredTerm": [{
+      "@id": "http://example.org/term/Fishie"
+    },
+      {
+        "@id": "http://example.org/term/Poisson"
+      },
+      {
+        "@id": "http://example.org/term/Fisch"
+      },
+      {
+        "@id": "http://example.org/term/Fisk"
+      }
+    ]
+  },
+    {
+      "@id": "http://example.org/term/Fishie",
+      "@type": "http://example.org/ontology#Term",
+      "http://example.org/ontology#label": "Fishie"
+
+    },
+    {
+      "@id": "http://example.org/term/Poisson",
+      "@type": "http://example.org/ontology#Term",
+      "http://example.org/ontology#label": "Poisson"
+
+    },
+    {
+      "@id": "http://example.org/term/Fisch",
+      "@type": "http://example.org/ontology#Term",
+      "http://example.org/ontology#label": "Fisch"
+
+    },
+    {
+      "@id": "http://example.org/term/Fisk",
+      "@type": "http://example.org/ontology#Term",
+      "http://example.org/ontology#label": "Fisk"
+
+    }
+  ]
+}

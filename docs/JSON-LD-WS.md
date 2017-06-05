@@ -105,7 +105,6 @@ Schema:
     "required": ["longitude", "latitude"]
 }
 ```
-
 Which specifies that "Place" is an object and that the object must contain a "longitude" and "latitude" key-value pairs.
 
 For which, the following validates:
@@ -243,7 +242,7 @@ Convert the following JSON document to a JSON-LD document:
 ```
 Simplest way:
 
-> Example: [Exercise one: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa001)
+> [Example 1: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa001)
 
 ```
 {
@@ -272,7 +271,7 @@ If we dereference the context document directly, we see:
 ```
 Rather than simply linking to the context-document, we could have included it directly in the JSON:
 
-> Example: [Exercise 2: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
+> [Example 2: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
 
 ```
 {
@@ -302,6 +301,8 @@ Thus, we are not talking about a generic concept "name", we are talking the spec
 
 **@context** can, as we have seen, be an IRI, which is dereferenced or an object.
 
+[Exercise 1: Adding context](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe001)
+
 #### @id
 
 JSON-LD introduces **@id** to provide support for IRIs as universal identifiers. This is probably the biggest innovation in JSON-LD, but also one it is easy to forget because it is often implicit*.
@@ -310,12 +311,16 @@ JSON-LD introduces **@id** to provide support for IRIs as universal identifiers.
 
 *NB:* @id works at the level of **object**, which mean that there is no **document** IRI concept in JSON-LD.
 
+Exercise: Try adding and removing @ids.
+
 #### @value
 With many properties, you just want a bare value, say 2, "Nice" or false, other times, you want to say more about the object of the property, here **@value** allows us to say that there is a value for the property, which can then be augmented with other data.
 
 #### @language
 
 We often want to talk about the language of a property, with **@language** and **@value** we can create an object that has a language:
+
+> [Example: Language simple](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp001)
 
 ```
 {
@@ -330,6 +335,8 @@ We often want to talk about the language of a property, with **@language** and *
 ```
 It is possible to use **@language** to set a default language for the document:
 
+>[Example: Language document default](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp002)
+
 ```
 {
 	"@context": {
@@ -342,9 +349,13 @@ It is possible to use **@language** to set a default language for the document:
 
 We return to the language concepts in JSON-LD later in more detail.
 
+[Exercise 2: Tagging strings for language](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe002)
+
 #### @type
 
 Datatypes for nodes or typed values are expressed with an **@type** keyword.
+
+>[Example: Adding types](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp003)
 
 ```
 {
@@ -367,6 +378,10 @@ Datatypes for nodes or typed values are expressed with an **@type** keyword.
 
 In this example, we have an event where I sat down and wept, this event is represented by an object with the type "DateOfThingHappening"; the object of the *date* property has a type of *xsd:date*, which is interpreted as an ISO-8601 compatible date.
 
+[Exercise 3: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe003)
+
+[Exercise 4: More datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe004)
+
 #### @container, @set and @list
 
 The **@container** keyword allows us to associate a specific type for container objects; this sounds tautological, but the syntax of JSON-LD allows for two kinds of syntactic container: arrays in all cases except language maps (which we will come back to in detail below).
@@ -374,6 +389,8 @@ The **@container** keyword allows us to associate a specific type for container 
 In JSON-LD an array is generally considered to be an unordered list; one can specify that an array is explicitly unordered by using the *@set* keyword. 
 
 In cases where an explicitly ordered list is required, the *@list* keyword can be used.
+
+>[Example: Lists and sets](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp004)
 
 ```
 {
@@ -392,11 +409,15 @@ In cases where an explicitly ordered list is required, the *@list* keyword can b
 }
 ```
 
+[Exercise 5: Coercing things into arrays](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe005)
+
 #### @reverse
 
 The **@reverse** term reverses property's relational semantics, thus if we have a term *eats*, applying **@reverse** to it makes it semantically equivalent to *eatenBy* and the term can be used to relate an edible item to its eaters. For example:
 
 Normal usage:
+
+>[Example: Reverse (without)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp005)
 
 ```
 {
@@ -408,6 +429,8 @@ Normal usage:
 }
 ```
 With **@reverse**:
+
+>[Example: Reverse (with)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp006)
 
 ```
 {
@@ -425,11 +448,15 @@ With **@reverse**:
 
 The way this works becomes much clearer with the NQuads view, where the roles of the subject and object are swapped.
 
+[Exercise 6: Reversing semantics](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe006)
+
 #### @container, @index
 
 Using the **@index** term makes data access easy, it adds a syntactic abstraction layer that makes it easy for programs to get the data in a predefined way.
 
 For example, given a data structure for a controlled vocabulary that is not marked up with **@index**:
+
+>[Example: Index (without)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp007)
 
 ```
 {
@@ -455,6 +482,8 @@ For example, given a data structure for a controlled vocabulary that is not mark
 This makes it quite hard to access the terms in the data in a way that makes sense if one wants to present entry points based on language.
 
 In order to do this, you can add the **@index** as the **@container**:
+
+>[Example: Index (with)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp008)
 
 ```
 {
@@ -484,11 +513,15 @@ In order to do this, you can add the **@index** as the **@container**:
 
 This second data structure is syntactically different to the first, but semantically identical. The keys "de" and "en" are completely ignored when converting to RDF, while a developer can access the data by requesting:
 
+[//]: # (SLIDE!!)
+ 
 ```const german = object.translation.de.label```
 
 This means that the code doesn't have to dig deep into the data structure to analyse what there is and what is needed.
 
 We used a language based example here, we'll return with more examples reagarding languages later.
+
+[Exercise 7: Indexer-friendly syntax](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe007)
 
 #### @base, @vocab
 
@@ -497,6 +530,8 @@ In the same way as most other serialisations, it is possible to set base values 
 The **@base** keyword allows us to set a IRI base for relative IRIs (setting ```"@base": "http://example.com/people/"``` will expand ```"@id": "1/Kim"``` to ```"@id": "http://example.com/people/1/Kim"``` . 
 
 Similarly, a base value can be set for vocabulary items with the **@vocab** element, so that we can set ```"@vocab": "http://example.org/ontology#"``` and expect all relative properties and types to be expanded with this.
+
+>[Example: @Base and @vocab](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp009)
 
 ```
 {
@@ -509,11 +544,15 @@ Similarly, a base value can be set for vocabulary items with the **@vocab** elem
 	"name": "Kim"
 }
 ```
+[Exercise 8: Making things pretty](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe008)
+
 #### @graph
 
 JSON-LD implements a graph in JSON, as this is the case, all data is contained in a "@graph", in cases where we have a single object, this will not be apparent unless one views the data in a specific way (flattened, we'll come back to this shortly) because the default graph that exists independently of everything else is suppressed when one only has one object.
 
 In cases where we want to use named graphs — say to compare new and old data — we can do so:
+
+>[Example: @graph](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fpartial%2Fp010)
 
 ```
 {
@@ -561,7 +600,7 @@ Note that there are several possible representations of this data in JSON-LD, th
 
 The first of these, expansion, *expands* the property references and removes the context object from the JSON. For example:
 
-> Example [Exercise two: Adding context (Expanded)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
+> [Example two: Adding context (Expanded)](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
 
 ```
 [
@@ -590,7 +629,7 @@ This is a particularly verbose representation, but one which can be used with si
 
 The second representation, compaction, provides structure for data that can be used for particular applications. 
 
-> Example [Exercise two: Adding context (Compacted)](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
+> [Example two: Adding context (Compacted)](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
 
 ```
 {
@@ -601,7 +640,7 @@ The second representation, compaction, provides structure for data that can be u
 ```
 Supplying a context makes it possible to compact the properties to terms and makes the data easier to work with in most programming jobs.
 
-> Example: [Exercise three: Adding context (Compacted with context)](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa003&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa003.jsonld)
+> [Example three: Adding context (Compacted with context)](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa003&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa003.jsonld)
 
 ```
 {
@@ -621,7 +660,7 @@ The third representation, flattening, is similar to expansion, but takes the sim
 
 In our case, the fact that we have an implicit blank node is made explicit and the *@graph* is added to wrap the node we are describing.
 
-> Example [Exercise two: Adding context (Flattened)](http://localhost:3211/json-ld.org/playground/#startTab=tab-flattened&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
+> [Example two: Adding context (Flattened)](http://localhost:3211/json-ld.org/playground/#startTab=tab-flattened&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa002)
 
 ```
 {
@@ -682,7 +721,7 @@ Many people don't understand or care about the semantics, and maybe they shouldn
 
 A simple step, which shows some of the functionality of the @context, can be to simply alias the "@" keys/values.
 
-> Example: [Exercise four: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa004.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa004.jsonld)
+> [Example four: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa004.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa004.jsonld)
 
 ```
 {
@@ -699,7 +738,7 @@ Here, I have aliased the @id to *uri* because that makes me feel more comfortabl
 
 Adding more data to the structure, we can see some other features of this way of doing things. Let's expand the context with a few shorthands:
 
-> Example: [Exercise five: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa005.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa005.jsonld)
+> [Example five: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa005.json&context=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa005.jsonld)
 
 ```
 {
@@ -713,12 +752,13 @@ Adding more data to the structure, we can see some other features of this way of
     "type": "Document" 
 }
 ```
+[Exercise 9: Aliasing](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe009)
 
 ### Datatypes
 
 Notice that we added a @type, datatype for the object; datatypes can also be applied to values:
 
-> Example: [Exercise six: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa006)
+> [Example six: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa006)
 
 ```
 {
@@ -740,7 +780,7 @@ Notice that we added a @type, datatype for the object; datatypes can also be app
 
 Here, we say that the title has a value "Peer Gynt" and the type of this is xsd:string, or rather we would if we had put xsd into the context…
 
-> Example: [Exercise seven: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa007)
+> [Example seven: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa007)
 
 ```
 {
@@ -763,7 +803,7 @@ Here, we say that the title has a value "Peer Gynt" and the type of this is xsd:
 
 There are a few things about this that are not very likeable; the whole "@value" and "@type" cluster, while practical from a regularity perspective is neither pretty nor necessary for most applications. Let's change this:
 
-> Example: [Exercise eight: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa008)
+> [Example eight: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa008)
 
 ```
 {
@@ -786,7 +826,7 @@ There are a few things about this that are not very likeable; the whole "@value"
 
 **NB!:** Using aliasing internally in the @context *usually* fails:
 
-> Example: [Exercise nine: Datatypes **(Fails)**](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa009)
+> [Example nine: Datatypes **(Fails)**](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa009)
 
 ```
 {
@@ -809,7 +849,7 @@ There are a few things about this that are not very likeable; the whole "@value"
 
 Adding other datatypes:
 
-> Example: [Exercise ten: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa010)
+> [Example ten: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa010)
 
 ```
 {
@@ -842,9 +882,13 @@ Adding other datatypes:
 
 Note that any datatype that can be used in RDF can be used in JSON-LD; note also the special function of "@id" visible in the *expanded* view, setting the datatype of the URI as a reference (in JSON-LD-speak) or a URI-resource in RDF.
 
+[Exercise 10: Yet more datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe010)
+
 ### Languages
 
 JSON-LD supports internationalisation using [BCP47](https://tools.ietf.org/html/bcp47) tags:
+
+[//]: # (SLIDE!!)
 
 ```
   "title": {
@@ -855,7 +899,7 @@ JSON-LD supports internationalisation using [BCP47](https://tools.ietf.org/html/
 
 Adding this to the main example, with a few variants shows that this is a bit untidy:
 
-> Example: [Exercise eleven: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa011)
+> [Example eleven: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa011)
 
 ```
 {
@@ -927,7 +971,7 @@ Adding this to the main example, with a few variants shows that this is a bit un
 
 Let's tidy that up a bit, in the way [Manu Sporny suggests](https://www.youtube.com/watch?v=UmvWk_TQ30A):
 
-> Example: [Exercise twelve: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa012)
+> [Example twelve: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa012)
 
 ```
 {
@@ -1000,7 +1044,7 @@ Let's tidy that up a bit, in the way [Manu Sporny suggests](https://www.youtube.
 ```
 However, I guess I prefer the [language map](https://json-ld.org/spec/latest/json-ld-api/#dfn-language-map) behaviour:
 
-> Example: [Exercise thirteen: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa013)
+> [Example thirteen: Languages](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa013)
 
 ```
 {
@@ -1042,11 +1086,13 @@ However, I guess I prefer the [language map](https://json-ld.org/spec/latest/jso
 }
 ```
 
+[Exercise 11: Language maps](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe011)
+
 ### Embedding resources
 
 Continuing with our example, let's take a look at another resource:
 
-> Example: [Exercise fourteen: Embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fperson%2Fa001)
+> [Example fourteen: Embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fperson%2Fa001)
 
 ```
 {
@@ -1087,7 +1133,7 @@ Continuing with our example, let's take a look at another resource:
 ```
 We can reference this resource in our existing resource:
 
-> Example: [Exercise fourteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa014)
+> [Example fourteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa014)
 
 ```
 {
@@ -1135,7 +1181,7 @@ We can reference this resource in our existing resource:
 ```
 We could put everything into one graph:
 
-> Example: [Exercise fifteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa015)
+> [Example fifteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa015)
 
 ```
 {
@@ -1217,7 +1263,7 @@ We could put everything into one graph:
 
 Or we can embed it:
 
-> Example: [Exercise sixteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa016)
+> [Example sixteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa016)
 
 ```
 {
@@ -1306,6 +1352,8 @@ Put simply, JSON-LD Framing is an effective way of manipulating the JSON-LD that
 
 We have a document that contains a graph that contains five nodes, one that is a Concept and four that are simply terms that are sometimes used (this is modelled to some extent after a simplified MeSH):
 
+> [Example: simple frame document (no frame)](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa017)
+
 ```
 {
 	"@graph": [{
@@ -1368,6 +1416,8 @@ This means I can say ```const terms = concept.terms```, when I want to access th
 
 Let's apply the simplest frame of all.
 
+> [Example: simple frame](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa017&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa017.jsonld)
+
 ```
 {
   "@context": {
@@ -1421,9 +1471,15 @@ This frame produces a new document that is restructured like we had imagined:
 }
 ```
 
-That was quite successful, I can now request every label in the document by selecting ```document.graph.nonPreferredTerm[index].label```.
+That was quite successful, I can now request every label in the document by selecting
+
+[//]: # (SLIDE!!)
+
+```document.graph.nonPreferredTerm[index].label```.
 
 This behaviour seems to indicate that the framing algorithm attempts to embedd nodes by default. We will look at embedding in detail in  a moment.
+
+[Exercise 12: Framing](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe012)
 
 ### What does the framing algorithm actually do?
 
@@ -1434,6 +1490,8 @@ This behaviour seems to indicate that the framing algorithm attempts to embedd n
 ### @default: taking things not being there into account
 
 Let's say we have the following data:
+
+> [Example: document (no frame)](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa018)
 
 ```
 {
@@ -1467,6 +1525,8 @@ Let's say we have the following data:
 ```
 
 And we'd like to make sure that the data is structured so that we can get each sale item in a way similar to the previous example; in this case, we also want to ensure that the data is uniformly structured and as some information is missing, we want to add that back in:
+
+> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa018&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa018.jsonld)
 
 ```
 {
@@ -1520,6 +1580,8 @@ The result:
 
 Let's take a look at the previous example, but use a new frame:
 
+> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa019&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa019.jsonld)
+
 ```
 {
 	"@context": {
@@ -1564,6 +1626,8 @@ The result looks like this:
 Using ```"@embed": "@never"``` causes the node object to be omitted, in its place, there is a reference. This can be useful in contexts where the data is loaded asyncronously.
 
 We can also use ```"@embed": "@last"``, the following example demonstrates some of the functionality. We have a series of three books by Knausgaard, 
+
+> [Example: unframed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa020)
 
 ```
 {
@@ -1614,6 +1678,8 @@ We can also use ```"@embed": "@last"``, the following example demonstrates some 
 ```
 
 Using the following frame, we can see how ```"@embed": "@last"``` affects only node-internal embedding, not graph-wide embedding.
+
+> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa020&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa020.jsonld)
 
 ```
 {
@@ -1672,6 +1738,8 @@ Because Knausgaard is both contributor and illustrator for the book, the two ref
 }
 ```
 Contrast this with the same, where the flag is set to "@always":
+
+> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa021&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa021.jsonld)
 
 ```
 {
@@ -1810,6 +1878,8 @@ The effect that this has is not apparent outside the processor (c.f. question ab
 
 How embedding works by default is controlled by passing an **embed** flag the JSON-LD processor
 
+[Exercise 13: Embedding](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe013)
+
 ### @explicit: controlling what is shown
 
 Other times, it is relevant to show only some of the data, for example, a very full description of an item is not necessary for a search preview, so the data can be reduced:
@@ -1926,11 +1996,15 @@ The result:
 }
 ```
 
+[Exercise 14: More embedding](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe014)
+
 
 ## Odd things that go wrong
 
 * Accidentally having the same key several places produces weird results
 * Confusing the **@context** with the frame
+
+[Exercise 15: The whole shebang](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fexercises%2Fe015)
 
 ## Programming with JSON-LD
 
