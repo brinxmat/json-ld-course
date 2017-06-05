@@ -741,6 +741,7 @@ Notice that we added a @type, datatype for the object; datatypes can also be app
 Here, we say that the title has a value "Peer Gynt" and the type of this is xsd:string, or rather we would if we had put xsd into the context…
 
 > Example: [Exercise seven: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa007)
+
 ```
 {
     "@context": {
@@ -763,6 +764,7 @@ Here, we say that the title has a value "Peer Gynt" and the type of this is xsd:
 There are a few things about this that are not very likeable; the whole "@value" and "@type" cluster, while practical from a regularity perspective is neither pretty nor necessary for most applications. Let's change this:
 
 > Example: [Exercise eight: Datatypes](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa008)
+
 ```
 {
     "@context": {
@@ -1925,7 +1927,10 @@ The result:
 ```
 
 
+## Odd things that go wrong
 
+* Accidentally having the same key several places produces weird results
+* Confusing the **@context** with the frame
 
 ## Programming with JSON-LD
 
