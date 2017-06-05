@@ -1,0 +1,96 @@
+{
+  "@context": {
+    "@base": "http://dbpedia.org/resource/",
+    "@vocab": "http://dbpedia.org/ontology/",
+    "yago": "http://dbpedia.org/class/yago/",
+    "schema": "http://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dbp": "http://dbpedia.org/property/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "type": "@type",
+    "id": "@id",
+    "value": "@value",
+    "lang": "@language",
+    "graph": "@graph",
+    "owl:sameAs": {
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "rdfs:label": {
+      "@container": "@language"
+    },
+    "abstract": {
+      "@container": "@language"
+    },
+    "rdfs:comment": {
+      "@container": "@language"
+    },
+    "activeYearsEndYear": {
+      "@type": "xsd:gYear"
+    },
+    "activeYearsStartYear": {
+      "@type": "xsd:gYear"
+    },
+    "birthDate": {
+      "@type": "xsd:gYear"
+    },
+    "birthYear": {
+      "@type": "xsd:gYear"
+    },
+    "birthPlace": {
+      "@type": "@id"
+    },
+    "occupation": {
+      "@type": "@id"
+    },
+    "wikiPageExternalLink": {
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "dbp:birthPlace": {
+      "@container": "@language"
+    },
+    "dbp:name": {
+      "@container": "@language"
+    },
+    "dbp:occupation": {
+      "@type": "@id"
+    },
+    "dbp:placeOfBirth": {
+      "@container": "@language"
+    },
+    "dbp:shortDescription": {
+      "@container": "@language"
+    },
+    "dbp:wordnet_type": {
+      "@type": "@id"
+    },
+    "dcterms:subject": {
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "prov:wasDerivedFrom": {
+      "@type": "@id"
+    },
+    "foaf:givenName": {
+      "@container": "@language"
+    },
+    "foaf:name": {
+      "@container": "@language"
+    },
+    "foaf:surname": {
+      "@container": "@language"
+    },
+    "foaf:isPrimaryTopicOf": {
+      "@type": "@id"
+    }
+  },
+  "type": "foaf:Person",
+  "abstract": {
+    "@default": "No abstract"
+  }
+}

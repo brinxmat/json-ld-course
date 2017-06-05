@@ -1,0 +1,25 @@
+{
+  "@context": {
+    "@base": "http://example.org/",
+    "@vocab": "http://example.org/ontology#",
+    "contributors": {
+      "@id": "contributor",
+      "@container": "@set"
+    },
+    "contributionType": {
+      "@type": "@id"
+    }
+  },
+  "@type": "Work",
+  "contributors": {
+    "@type": "Contribution",
+    "agent": {
+      "@explicit": true,
+      "@type": "Agent",
+      "name": {}
+    }
+  },
+  "genre": {
+    "@embed": "@never"
+  }
+}

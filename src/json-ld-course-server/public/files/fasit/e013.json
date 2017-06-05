@@ -1,0 +1,10 @@
+{
+  "@context": {
+    "@base": "http://example.org/",
+    "@vocab": "http://example.org/ontology#"
+  },
+  "@type": "Work",
+  "genre": {
+    "@embed": "@never"
+  }
+}

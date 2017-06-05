@@ -1,0 +1,207 @@
+{
+  "@graph": [
+    {
+      "@id": "http://dbpedia.org/resource/Maro_Douka",
+      "http://example.org/jsonld": "http://dbpedia.org/data/Maro_Douka.jsonld",
+      "@type": [
+        "http://www.wikidata.org/entity/Q215627",
+        "http://dbpedia.org/class/yago/LivingThing100004258",
+        "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent",
+        "http://dbpedia.org/class/yago/CausalAgent100007347",
+        "http://dbpedia.org/class/yago/Organism100004475",
+        "http://schema.org/Person",
+        "http://dbpedia.org/class/yago/Person100007846",
+        "http://dbpedia.org/class/yago/Object100002684",
+        "http://dbpedia.org/class/yago/WikicatGreekWomenNovelists",
+        "http://dbpedia.org/ontology/Person",
+        "http://www.wikidata.org/entity/Q5",
+        "http://dbpedia.org/ontology/Agent",
+        "http://dbpedia.org/class/yago/Writer110794014",
+        "http://www.w3.org/2002/07/owl#Thing",
+        "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson",
+        "http://dbpedia.org/class/yago/Communicator109610660",
+        "http://www.wikidata.org/entity/Q36180",
+        "http://dbpedia.org/class/yago/YagoLegalActor",
+        "http://dbpedia.org/class/yago/PhysicalEntity100001930",
+        "http://dbpedia.org/class/yago/Whole100003553",
+        "http://dbpedia.org/class/yago/WikicatLivingPeople",
+        "http://dbpedia.org/class/yago/YagoLegalActorGeo",
+        "http://dbpedia.org/ontology/Writer",
+        "http://dbpedia.org/class/yago/Novelist110363573",
+        "http://dbpedia.org/class/yago/WikicatCretanNovelists",
+        "http://umbel.org/umbel/rc/Writer",
+        "http://xmlns.com/foaf/0.1/Person",
+        "http://dbpedia.org/class/yago/WikicatGreekWomenWriters"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": [
+        {
+          "@value": "Maro Douka",
+          "@language": "en"
+        },
+        {
+          "@value": "Maro Douka",
+          "@language": "pt"
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        {
+          "@value": "Maro Douka (Greek: Μάρω Δούκα; born 1947) is a Greek novelist. She has lived in Athens since 1966 and she studied History and Archaeology at the University of Athens. She belongs to the so-called Genia tou 70, which is a literary term referring to Greek authors who began publishing their work during the 1970s; her debut work, Η Πηγάδα, based on her imprisonment in 1967 by the Military Junta, was published in 1974, just a few months after the Metapolitefsi.",
+          "@language": "en"
+        },
+        {
+          "@value": "Maro Douka (em grego: Μάρω Δούκα) (Nascida em 1947 em Chania, Creta, Grécia) é uma escritora e novelista grega. Ela vive em Atenas desde 1966 e estudou história e arqueologia na Universidade de Atenas.",
+          "@language": "pt"
+        }
+      ],
+      "http://www.w3.org/2002/07/owl#sameAs": [
+        {
+          "@id": "http://el.dbpedia.org/resource/Μάρω_Δούκα"
+        },
+        {
+          "@id": "http://rdf.freebase.com/ns/m.03wf7tc"
+        },
+        {
+          "@id": "http://yago-knowledge.org/resource/Maro_Douka"
+        },
+        {
+          "@id": "http://www.wikidata.org/entity/Q3296538"
+        },
+        {
+          "@id": "http://wikidata.dbpedia.org/resource/Q3296538"
+        },
+        {
+          "@id": "http://pt.dbpedia.org/resource/Maro_Douka"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": {
+        "@id": "http://en.wikipedia.org/wiki/Maro_Douka?oldid=683104961"
+      },
+      "http://xmlns.com/foaf/0.1/name": [
+        {
+          "@value": "Maro Douka",
+          "@language": "en"
+        },
+        {
+          "@value": "Douka, Maro",
+          "@language": "en"
+        }
+      ],
+      "http://purl.org/dc/elements/1.1/description": [
+        {
+          "@value": "Greek writer",
+          "@language": "en"
+        },
+        "Greek writer"
+      ],
+      "http://xmlns.com/foaf/0.1/givenName": {
+        "@value": "Maro",
+        "@language": "en"
+      },
+      "http://xmlns.com/foaf/0.1/isPrimaryTopicOf": {
+        "@id": "http://en.wikipedia.org/wiki/Maro_Douka"
+      },
+      "http://xmlns.com/foaf/0.1/surname": {
+        "@value": "Douka",
+        "@language": "en"
+      },
+      "http://purl.org/dc/terms/subject": [
+        {
+          "@id": "http://dbpedia.org/resource/Category:Cretan_novelists"
+        },
+        {
+          "@id": "http://dbpedia.org/resource/Category:Greek_women_writers"
+        },
+        {
+          "@id": "http://dbpedia.org/resource/Category:1947_births"
+        },
+        {
+          "@id": "http://dbpedia.org/resource/Category:Greek_women_novelists"
+        },
+        {
+          "@id": "http://dbpedia.org/resource/Category:National_and_Kapodistrian_University_of_Athens_alumni"
+        },
+        {
+          "@id": "http://dbpedia.org/resource/Category:Living_people"
+        }
+      ],
+      "http://dbpedia.org/ontology/occupation": {
+        "@id": "http://dbpedia.org/resource/Novelist"
+      },
+      "http://dbpedia.org/ontology/activeYearsEndYear": {
+        "@value": "1974",
+        "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      },
+      "http://dbpedia.org/ontology/activeYearsStartYear": {
+        "@value": "1974",
+        "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      },
+      "http://dbpedia.org/property/occupation": {
+        "@id": "http://dbpedia.org/resource/Novelist"
+      },
+      "http://dbpedia.org/property/wordnet_type": {
+        "@id": "http://www.w3.org/2006/03/wn/wn20/instances/synset-writer-noun-1"
+      },
+      "http://dbpedia.org/property/dateOfBirth": 1947,
+      "http://dbpedia.org/property/placeOfBirth": {
+        "@value": "Chania, Greece",
+        "@language": "en"
+      },
+      "http://dbpedia.org/property/shortDescription": {
+        "@value": "Greek writer",
+        "@language": "en"
+      },
+      "http://dbpedia.org/ontology/abstract": [
+        {
+          "@value": "Maro Douka (em grego: Μάρω Δούκα) (Nascida em 1947 em Chania, Creta, Grécia) é uma escritora e novelista grega. Ela vive em Atenas desde 1966 e estudou história e arqueologia na Universidade de Atenas.",
+          "@language": "pt"
+        },
+        {
+          "@value": "Maro Douka (Greek: Μάρω Δούκα; born 1947) is a Greek novelist. She has lived in Athens since 1966 and she studied History and Archaeology at the University of Athens. She belongs to the so-called Genia tou 70, which is a literary term referring to Greek authors who began publishing their work during the 1970s; her debut work, Η Πηγάδα, based on her imprisonment in 1967 by the Military Junta, was published in 1974, just a few months after the Metapolitefsi. She was awarded the Nikos Kazantzakis Prize of the Municipality of Heraklion for Η αρχαία σκουριά and the Greek State Prize for Literature for Η πλωτή πόλη (declining the latter). Αθώοι και φταίχτες, was awarded the Balkanika Prize for Literature, the Kostas and Eleni Ouranis Prize of the Academy of Athens and the Cavafy prize. She has also been awarded the N. Themelis prize for her last novel Έλα να πούμε ψέματα. She is a founding member of the Hellenic Authors' Society. At the 2014 local elections, she was elected to the City Council of Athens under the \"Anoihti Poli\" Syriza ticket, led by the candidate Gabriel Sakellaridis.",
+          "@language": "en"
+        }
+      ],
+      "http://dbpedia.org/ontology/birthYear": {
+        "@value": "1947",
+        "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      },
+      "http://dbpedia.org/property/name": [
+        {
+          "@value": "Douka, Maro",
+          "@language": "en"
+        },
+        {
+          "@value": "Maro Douka",
+          "@language": "en"
+        }
+      ],
+      "http://dbpedia.org/ontology/birthPlace": {
+        "@id": "http://dbpedia.org/resource/Chania"
+      },
+      "http://dbpedia.org/property/birthPlace": {
+        "@value": "Chania, Greece",
+        "@language": "en"
+      },
+      "http://dbpedia.org/ontology/birthDate": {
+        "@value": "1947",
+        "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      },
+      "http://dbpedia.org/ontology/wikiPageID": 16258016,
+      "http://dbpedia.org/ontology/wikiPageRevisionID": 683104961,
+      "http://dbpedia.org/ontology/wikiPageExternalLink": [
+        {
+          "@id": "http://www.ithacaonline.gr/042005/cv01.htm"
+        },
+        {
+          "@id": "http://www.greece2001.gr/writers/MaroDouka.html"
+        },
+        {
+          "@id": "http://www.dedalus.gr/gr/author.asp?id=83"
+        },
+        {
+          "@id": "http://www.patakis.gr/SearchTableLookupVirtual.aspx?TableId=1&val=411271"
+        }
+      ],
+      "http://dbpedia.org/property/period": 1974
+    }
+  ]
+}
