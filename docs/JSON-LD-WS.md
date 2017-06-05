@@ -1092,7 +1092,7 @@ However, I guess I prefer the [language map](https://json-ld.org/spec/latest/jso
 
 Continuing with our example, let's take a look at another resource:
 
-> [Example fourteen: Embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fperson%2Fa001)
+> [Example fourteen A: Embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fperson%2Fp001)
 
 ```
 {
@@ -1133,7 +1133,7 @@ Continuing with our example, let's take a look at another resource:
 ```
 We can reference this resource in our existing resource:
 
-> [Example fourteen: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa014)
+> [Example fourteen B: embedding resources](http://localhost:3211/json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa014)
 
 ```
 {
@@ -1491,7 +1491,7 @@ This behaviour seems to indicate that the framing algorithm attempts to embedd n
 
 Let's say we have the following data:
 
-> [Example: document (no frame)](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa018)
+> [Example: Default (no frame)](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa018)
 
 ```
 {
@@ -1580,7 +1580,7 @@ The result:
 
 Let's take a look at the previous example, but use a new frame:
 
-> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa019&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa019.jsonld)
+> [Example: Embedding in frames](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa019&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa019.jsonld)
 
 ```
 {
@@ -1679,7 +1679,7 @@ We can also use ```"@embed": "@last"``, the following example demonstrates some 
 
 Using the following frame, we can see how ```"@embed": "@last"``` affects only node-internal embedding, not graph-wide embedding.
 
-> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa020&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa020.jsonld)
+> [Example: embedding with @last](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa020&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa020.jsonld)
 
 ```
 {
@@ -1739,7 +1739,7 @@ Because Knausgaard is both contributor and illustrator for the book, the two ref
 ```
 Contrast this with the same, where the flag is set to "@always":
 
-> [Example: framed](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa021&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa021.jsonld)
+> [Example: Embedding with @always](http://localhost:3211/json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2Flocalhost%3A3211%2Fdocument%2Fa021&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa021.jsonld)
 
 ```
 {
