@@ -1,7 +1,10 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const router = express.Router();
+
 
 function getHost() {
   if ("undefined" === typeof process.env.LOCAL_NETWORK) {
@@ -116,7 +119,7 @@ const initialData = {
     {
       part: 19,
       title: 'Example 17 B: Simple frame document (framed)',
-      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa017&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa017.jsonld'
+      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa017&frame=http%3A%2F%2F' + getHost() + '%2Fcontext%2Fa017.jsonld'
     },
     {
       part: 20,
@@ -126,29 +129,29 @@ const initialData = {
     {
       part: 21,
       title: 'Example 18 B: Default (framed)',
-      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa018&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa018.jsonld'
+      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa018&frame=http%3A%2F%2F' + getHost() + '%2Fcontext%2Fa018.jsonld'
     },
     {
       part: 22,
       title: 'Example 19: Embedding in frames',
-      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa019&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa019.jsonld'
+      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa019&frame=http%3A%2F%2F' + getHost() + '%2Fcontext%2Fa019.jsonld'
     },
     {
       part: 23,
       title: 'Example 20: embedding with @last',
-      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa020&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa020.jsonld'
+      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa020&frame=http%3A%2F%2F' + getHost() + '%2Fcontext%2Fa020.jsonld'
     },
     {
       part: 24,
       title: 'Example 21: Embedding with @always',
-      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa021&frame=http%3A%2F%2Flocalhost%3A3211%2Fcontext%2Fa021.jsonld'
+      resource: 'json-ld.org/playground/#startTab=tab-framed&json-ld=http%3A%2F%2F' + getHost() + '%2Fdocument%2Fa021&frame=http%3A%2F%2F' + getHost() + '%2Fcontext%2Fa021.jsonld'
     }
   ],
   exercises: [
     {
       exercise: 1,
       title: 'Exercise 1: Adding context',
-      resource: 'json-ld.org/playground/#startTab=tab-compacted&json-ld=http%3A%2F%2F' + getHost() + '%2Fexercises%2Fe001'
+      resource: 'json-ld.org/playground/#startTab=tab-expanded&json-ld=http%3A%2F%2F' + getHost() + '%2Fexercises%2Fe001'
     },
     {
       exercise: 2,
@@ -245,13 +248,16 @@ router.get('/:contextDirectory/:contextFile', function (req, res, next) {
     }
   }
 
-  res.sendFile('files/' + contextDirectory + '/' + leaf, options, function (err) {
-    if (err) {
-      next(err);
-    } else {
-      console.log('Ipcress' + process.env.LOCAL_NETWORK)
 
-      console.log('Sent:', leaf);
+
+  fs.readFile(path.join(__dirname, '..', 'public', 'files', contextDirectory, leaf), 'utf8', (error, data) => {
+    if (error) {
+      console.log(error);
+      res.sendStatus(404);
+    } else {
+      const returnData = ("undefined" === typeof process.env.LOCAL_NETWORK) ? data : data.replace(/localhost:3211/g, process.env.LOCAL_NETWORK);
+      res.set('Content-Type', 'application/ld+json; charset=utf-8');
+      res.status(200).send(returnData);
     }
   });
 });
