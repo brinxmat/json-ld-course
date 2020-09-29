@@ -7,14 +7,14 @@ block content
   ul
     for tool in tools
       li
-        a(href="#{tool.resource}") #{tool.title}
+        a(href=tool.resource) #{tool.title}
   h2 Sections
   ul
     for part in parts
       li
-        a(href="#{part.resource}") #{part.title}
+        a(href=part.resource) #{part.title}
   h2 Exercises
   ul
     for exercise in exercises
       li
-        a(href="#{exercise.resource}") #{exercise.title}
+        a(href=exercise.resource) #{exercise.title}

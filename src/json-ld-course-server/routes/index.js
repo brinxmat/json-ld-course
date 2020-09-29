@@ -233,21 +233,20 @@ router.get('/', function (req, res, next) {
 
 router.get('/:contextDirectory/:contextFile', function (req, res, next) {
 
-  var json = '.json';
-  var contextFile = req.params.contextFile;
-  var contextDirectory = req.params.contextDirectory;
+  const json = '.json';
+  const contextFile = req.params.contextFile;
+  const contextDirectory = req.params.contextDirectory;
 
-  var leaf = (contextDirectory !== 'context' && contextFile.substring(contextFile.length - json.length) !== json) ?
-  contextFile + json : contextFile;
+  const leaf = (contextDirectory !== 'context' && contextFile.substring(contextFile.length - json.length) !== json) ?
+      contextFile + json : contextFile;
 
-  var options = {
+  const options = {
     root: __dirname + '/../public/',
     dotfiles: 'deny',
     'headers': {
       'Content-Type': 'application/ld+json; charset=utf-8'
     }
-  }
-
+  };
 
 
   fs.readFile(path.join(__dirname, '..', 'public', 'files', contextDirectory, leaf), 'utf8', (error, data) => {
