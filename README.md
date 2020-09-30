@@ -33,7 +33,7 @@ $ docker rmi brinxmat/json-ld-course-server
 Pre-requisites [Docker](https://www.docker.com/community-edition), Make ([Debian](https://www.google.no/search?q=sudo+apt-get+install+build-essential&oq=sudo+apt-get+install+build-essential) | [Mac](https://stackoverflow.com/questions/10265742/how-to-install-make-and-gcc-on-a-mac) | [Win](http://www.mingw.org/))
 
 ```
-$ git clone https://github.com/brinxmat/json-ld-course.git
+$ git clone --recurse-submodules https://github.com/brinxmat/json-ld-course.git
 $ cd json-ld-course/src/json-ld-course-server
 $ make build
 $ make run
@@ -53,13 +53,11 @@ We build the docker image by running the following command in the json-ld-course
 
 This builds the image, which can then be run using the following command:
 
-```$ docker run -p 3211:3211 -it --rm --name json-ld-course-server json-ld-course-server```
+```$ docker run --publish 3211:3211 -it --name json-ld-course-server brinxmat/json-ld-course-server:latest```
 
 Here we're specifying that we run the container, while exposing the server that we're built in the previous step on port 3211 on the host (it incidentally uses port 3211 internally).
 
 We state with ```-it``` that we want to output STDOUT to a pseudo-tty.
-
-With ```--rm``` we attempt to clean up any mess that running the container may leave behind when it exits. This is fine when we're running a course, but perhaps not in other contexts.
 
 Finally we give the container a recognisable name, so that when we run ```$ docker ps```, we get a nice display name to relate to, rather than a hash.
 
