@@ -67,7 +67,7 @@ If you want to run the node application directly and have installed node and npm
 
 ```
 $ git clone https://github.com/brinxmat/json-ld-course.git
-$ cd json-ld-course/src/json-ld-course-server 
-$ npm start 
+$ cd json-ld-course/src/json-ld-course-server
+$ npm i
+$ npm start
 ```
-
