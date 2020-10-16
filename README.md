@@ -66,7 +66,7 @@ Finally we give the container a recognisable name, so that when we run ```$ dock
 If you want to run the node application directly and have installed node and npm installed, you can try:
 
 ```
-$ git clone https://github.com/brinxmat/json-ld-course.git
+$ git clone --recurse-submodules https://github.com/brinxmat/json-ld-course.git
 $ cd json-ld-course/src/json-ld-course-server
 $ npm i
 $ npm start
